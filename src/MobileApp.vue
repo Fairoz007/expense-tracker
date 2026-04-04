@@ -6,6 +6,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
+import { useAuth } from '@clerk/vue';
+import { useConvexClient } from 'convex-vue';
 
 import type { Framework7Parameters, Notification, Actions, Dialog, Popover, Popup, Sheet } from 'framework7/types';
 import { f7ready } from 'framework7-vue';
@@ -33,6 +35,25 @@ import { setExpenseAndIncomeAmountColor } from '@/lib/ui/common.ts';
 import { isiOSHomeScreenMode, isModalShowing, setAppFontSize } from '@/lib/ui/mobile.ts';
 
 const { tt, getCurrentLanguageInfo, setLanguage, initLocale } = useI18n();
+
+const { isLoaded, isSignedIn, getToken } = useAuth();
+const convex = useConvexClient();
+
+watch([isLoaded, isSignedIn], () => {
+    if (isLoaded.value && isSignedIn.value) {
+        convex.setAuth(async () => {
+            try {
+                // @ts-ignore
+                const fetchToken = getToken.value || getToken;
+                return await fetchToken({ template: 'convex' });
+            } catch (err) {
+                return null;
+            }
+        });
+    } else if (isLoaded.value && !isSignedIn.value) {
+        convex.clearAuth();
+    }
+}, { immediate: true });
 
 const rootStore = useRootStore();
 const settingsStore = useSettingsStore();

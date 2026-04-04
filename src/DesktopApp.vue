@@ -17,6 +17,8 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
+import { useAuth } from '@clerk/vue';
+import { useConvexClient } from 'convex-vue';
 
 import { useTheme } from 'vuetify';
 import { register } from 'register-service-worker';
@@ -40,6 +42,24 @@ import { getSystemTheme, setExpenseAndIncomeAmountColor } from '@/lib/ui/common.
 const { tt, getCurrentLanguageInfo, setLanguage, initLocale } = useI18n();
 
 const theme = useTheme();
+const { isLoaded, isSignedIn, getToken } = useAuth();
+const convex = useConvexClient();
+
+watch([isLoaded, isSignedIn], () => {
+    if (isLoaded.value && isSignedIn.value) {
+        convex.setAuth(async () => {
+            try {
+                // @ts-ignore
+                const fetchToken = getToken.value || getToken;
+                return await fetchToken({ template: 'convex' });
+            } catch (err) {
+                return null;
+            }
+        });
+    } else if (isLoaded.value && !isSignedIn.value) {
+        convex.clearAuth();
+    }
+}, { immediate: true });
 
 const rootStore = useRootStore();
 const settingsStore = useSettingsStore();
