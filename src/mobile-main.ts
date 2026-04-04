@@ -2,6 +2,9 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createI18n } from 'vue-i18n';
 
+import { clerkPlugin } from '@clerk/vue';
+import { convexVue } from 'convex-vue';
+
 import Framework7 from 'framework7/lite';
 import Framework7Dialog from 'framework7/components/dialog';
 import Framework7Popup from 'framework7/components/popup';
@@ -140,6 +143,12 @@ const i18n = createI18n(getI18nOptions());
 registerComponents(app);
 app.use(pinia);
 app.use(i18n);
+app.use(convexVue, {
+    url: import.meta.env['VITE_CONVEX_URL'] as string
+});
+app.use(clerkPlugin, {
+    publishableKey: import.meta.env['VITE_CLERK_PUBLISHABLE_KEY'] as string
+});
 
 app.component('VueDatePicker', VueDatePicker);
 

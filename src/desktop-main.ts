@@ -124,6 +124,9 @@ import '@/styles/desktop/amount-color.scss';
 
 import App from './DesktopApp.vue';
 
+import { clerkPlugin } from '@clerk/vue';
+import { convexVue } from 'convex-vue';
+
 const app = createApp(App);
 const pinia = createPinia();
 const i18n = createI18n(getI18nOptions()) as I18n<Record<string, unknown>, Record<string, unknown>, Record<string, unknown>, string, false>;
@@ -516,6 +519,12 @@ app.use(pinia);
 app.use(i18n);
 app.use(vuetify);
 app.use(router);
+app.use(convexVue, {
+    url: import.meta.env['VITE_CONVEX_URL'] as string
+});
+app.use(clerkPlugin, {
+    publishableKey: import.meta.env['VITE_CLERK_PUBLISHABLE_KEY'] as string
+});
 
 app.component('VChart', VChart);
 app.component('PerfectScrollbar', PerfectScrollbar);
