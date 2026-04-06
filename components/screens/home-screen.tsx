@@ -16,7 +16,7 @@ import {
 } from "recharts";
 
 interface HomeScreenProps {
-  onNavigate: (screen: string) => void;
+  onNavigate: (screen: string, data?: any) => void;
 }
 
 export function HomeScreen({ onNavigate }: HomeScreenProps) {
@@ -227,7 +227,8 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           {recentTransactions.map((tx, index) => (
             <div
               key={(tx as any)._id || (tx as any).id || index}
-              className="flex items-center justify-between p-3 bg-card rounded-xl border border-transparent hover:border-border transition-all"
+              onClick={() => onNavigate("transaction-detail", tx)}
+              className="flex items-center justify-between p-3 bg-card rounded-xl border border-transparent hover:border-border transition-all cursor-pointer active:scale-[0.98]"
             >
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">

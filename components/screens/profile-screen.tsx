@@ -20,7 +20,7 @@ import { Bell } from "lucide-react";
 
 interface ProfileScreenProps {
   onBack: () => void;
-  onNavigate: (screen: string) => void;
+  onNavigate: (screen: string, data?: any) => void;
 }
 
 const menuItems = [

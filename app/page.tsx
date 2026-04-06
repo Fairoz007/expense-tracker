@@ -11,9 +11,10 @@ import { TotalExpenseScreen } from "@/components/screens/total-expense-screen";
 import { AddExpenseScreen } from "@/components/screens/add-expense-screen";
 import { ProfileScreen } from "@/components/screens/profile-screen";
 import { RemindersScreen } from "@/components/screens/reminders-screen";
+import { TransactionDetailScreen } from "@/components/screens/transaction-detail-screen";
 import { BottomNavigation } from "@/components/ui/bottom-navigation";
 
-type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders";
+type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders" | "transaction-detail";
 
 export default function HomePage() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -21,6 +22,8 @@ export default function HomePage() {
   const seedInitialData = useMutation(api.expenses.seedInitialData);
   const [currentScreen, setCurrentScreen] = useState<Screen>("onboarding");
   const [hasOnboarded, setHasOnboarded] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   // Check if user has completed onboarding and handle screen shortcuts
   useEffect(() => {
@@ -79,7 +82,18 @@ export default function HomePage() {
     setCurrentScreen("signin");
   };
 
-  const handleNavigation = (screen: string) => {
+  const handleNavigation = (screen: string, data?: any) => {
+    if (screen === "transaction-detail") {
+      setSelectedTransaction(data);
+      setIsEditing(false);
+    } else if (screen === "add" && data) {
+      // This is for editing from the detail screen
+      setSelectedTransaction(data);
+      setIsEditing(true);
+    } else if (screen === "add") {
+      setSelectedTransaction(null);
+      setIsEditing(false);
+    }
     setCurrentScreen(screen as Screen);
   };
 
@@ -132,11 +146,45 @@ export default function HomePage() {
     );
   }
 
-  // Show add expense screen
+  // Show add/edit expense screen
   if (currentScreen === "add") {
     return (
       <div className="mobile-container min-h-dvh">
-        <AddExpenseScreen onBack={() => setCurrentScreen("home")} />
+        <AddExpenseScreen 
+          onBack={() => {
+            if (isEditing) {
+              setCurrentScreen("transaction-detail");
+            } else {
+              setCurrentScreen("home");
+            }
+          }} 
+          initialData={isEditing ? {
+            id: selectedTransaction._id,
+            amount: selectedTransaction.amount,
+            category: selectedTransaction.category,
+            description: selectedTransaction.description,
+            date: selectedTransaction.date,
+            type: selectedTransaction.type,
+          } : undefined}
+        />
+      </div>
+    );
+  }
+
+  // Show transaction detail screen
+  if (currentScreen === "transaction-detail" && selectedTransaction) {
+    return (
+      <div className="mobile-container min-h-dvh">
+        <TransactionDetailScreen 
+          transaction={selectedTransaction}
+          onBack={() => setCurrentScreen("home")}
+          onEdit={(tx) => {
+            setSelectedTransaction(tx);
+            setIsEditing(true);
+            setCurrentScreen("add");
+          }}
+          onDeleteSuccess={() => setCurrentScreen("home")}
+        />
       </div>
     );
   }

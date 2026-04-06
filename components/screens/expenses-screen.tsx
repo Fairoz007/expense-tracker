@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const weekDays = ["M", "T", "W", "T", "F", "S", "S"];
 
 interface ExpensesScreenProps {
-  onNavigate: (screen: string) => void;
+  onNavigate: (screen: string, data?: any) => void;
 }
 
 export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {

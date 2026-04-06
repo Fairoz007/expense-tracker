@@ -264,6 +264,21 @@ export const deleteExpense = mutation({
   },
 });
 
+export const updateExpense = mutation({
+  args: {
+    expenseId: v.id("expenses"),
+    amount: v.optional(v.number()),
+    category: v.optional(v.string()),
+    description: v.optional(v.string()),
+    date: v.optional(v.number()),
+    type: v.optional(v.union(v.literal("expense"), v.literal("income"))),
+  },
+  handler: async (ctx, args) => {
+    const { expenseId, ...updates } = args;
+    await ctx.db.patch(expenseId, updates);
+  },
+});
+
 export const clearAllUserData = mutation({
   args: { clerkId: v.string() },
   handler: async (ctx, args) => {

@@ -44,25 +44,34 @@ function getCategoryIcon(category: string): React.ReactNode {
 
 interface AddExpenseScreenProps {
   onBack: () => void;
+  initialData?: {
+    id: any;
+    amount: number;
+    category: string;
+    description?: string;
+    date: number;
+    type: "expense" | "income";
+  };
 }
 
-export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
+export function AddExpenseScreen({ onBack, initialData }: AddExpenseScreenProps) {
   const { user } = useUser();
   const addExpense = useMutation(api.expenses.addExpense);
+  const updateExpense = useMutation(api.expenses.updateExpense);
   const categories = useQuery(
     api.categories.getCategories,
     user?.id ? { clerkId: user.id } : "skip"
   );
 
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [transactionType, setTransactionType] = useState<"expense" | "income">("expense");
-  const [selectedCategory, setSelectedCategory] = useState("Grocery");
+  const [title, setTitle] = useState(initialData?.description || "");
+  const [amount, setAmount] = useState(initialData?.amount?.toString() || "");
+  const [transactionType, setTransactionType] = useState<"expense" | "income">(initialData?.type || "expense");
+  const [selectedCategory, setSelectedCategory] = useState(initialData?.category || "Grocery");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("wallet");
   const [notes, setNotes] = useState("");
   const [isRecurring, setIsRecurring] = useState(false);
   const [selectedType, setSelectedType] = useState("Need");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(initialData ? new Date(initialData.date) : new Date());
   const [isLoading, setIsLoading] = useState(false);
   const [rawSms, setRawSms] = useState("");
 
@@ -173,19 +182,31 @@ export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
 
     setIsLoading(true);
     try {
-      await addExpense({
-        clerkId: user.id,
-        amount: parseFloat(amount),
-        category: transactionType === "income" ? "Income" : selectedCategory,
-        description: title.trim(),
-        date: selectedDate.getTime(),
-        type: transactionType,
-      });
-      toast.success(`${transactionType === "income" ? "Income" : "Expense"} added successfully!`);
+      if (initialData) {
+        await updateExpense({
+          expenseId: initialData.id,
+          amount: parseFloat(amount),
+          category: transactionType === "income" ? "Income" : selectedCategory,
+          description: title.trim(),
+          date: selectedDate.getTime(),
+          type: transactionType,
+        });
+        toast.success(`${transactionType === "income" ? "Income" : "Expense"} updated successfully!`);
+      } else {
+        await addExpense({
+          clerkId: user.id,
+          amount: parseFloat(amount),
+          category: transactionType === "income" ? "Income" : selectedCategory,
+          description: title.trim(),
+          date: selectedDate.getTime(),
+          type: transactionType,
+        });
+        toast.success(`${transactionType === "income" ? "Income" : "Expense"} added successfully!`);
+      }
       onBack();
     } catch (error: any) {
       console.error("[v0] Expense save error:", error);
-      toast.error(error?.message || "Failed to add transaction. Please try again.");
+      toast.error(error?.message || `Failed to ${initialData ? 'update' : 'add'} transaction. Please try again.`);
     } finally {
       setIsLoading(false);
     }
@@ -212,7 +233,7 @@ export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
           <span className="font-bold">Back</span>
         </button>
         <h1 className="flex-1 text-center text-xl font-bold text-foreground pr-12">
-          Add Transaction
+          {initialData ? "Edit Transaction" : "Add Transaction"}
         </h1>
       </div>
 
@@ -435,7 +456,7 @@ export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
               : "bg-[var(--coral)] hover:bg-[var(--coral)]/90 shadow-lg shadow-[var(--coral)]/20"
           )}
         >
-          {isLoading ? "Processing..." : "Add Transaction"}
+          {isLoading ? "Processing..." : (initialData ? "Update Transaction" : "Add Transaction")}
         </button>
       </div>
     </div>
