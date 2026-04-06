@@ -96,7 +96,7 @@ export const getBudgetStatus = query({
         budget: b.amount,
         actual: actual,
         remaining: b.amount - actual,
-        percentage: (actual / b.amount) * 100,
+        percentage: b.amount > 0 ? (actual / b.amount) * 100 : (actual > 0 ? 100 : 0),
       };
     });
   },
