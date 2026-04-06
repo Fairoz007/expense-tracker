@@ -37,8 +37,9 @@ const menuItems = [
   },
   {
     icon: DollarSign,
-    title: "Currencies",
-    description: "Adjust exchange rates and currencies",
+    title: "Budgets",
+    description: "Set monthly category limits",
+    screen: "budget",
   },
   {
     icon: Grid3X3,

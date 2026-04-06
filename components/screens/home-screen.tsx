@@ -7,16 +7,24 @@ import { api } from "@/convex/_generated/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, MoreHorizontal, ChevronDown, ShoppingBag, Utensils, Package, Coffee, Car, Film, FileText, Activity } from "lucide-react";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
+  PieChart,
+  Pie,
   Cell,
+  ResponsiveContainer,
+  Tooltip,
+  Legend,
 } from "recharts";
 
 interface HomeScreenProps {
   onNavigate: (screen: string, data?: any) => void;
+}
+
+interface BudgetStatus {
+  category: string;
+  budget: number;
+  actual: number;
+  remaining: number;
+  percentage: number;
 }
 
 export function HomeScreen({ onNavigate }: HomeScreenProps) {
@@ -55,34 +63,28 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
     user?.id ? { clerkId: user.id } : "skip"
   );
 
+  const budgetStatus = useQuery(
+    api.budgets.getBudgetStatus,
+    user?.id ? { clerkId: user.id, startDate: startOfMonth, endDate: endOfMonth } : "skip"
+  );
+
   const currentMonth = new Date().toLocaleString('default', { month: 'short' });
 
-  // Calculate analytics data from real expenses
-  const analyticsData = useMemo(() => {
-    if (!expenses || expenses.length === 0) {
-      return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"].map(m => ({ month: m, amount: 0 }));
+  // Calculate analytics data for Pie Chart from expensesSummary
+  const analyticsPieData = useMemo(() => {
+    if (!expensesSummary?.byCategory || expensesSummary.byCategory.length === 0) {
+      return [{ name: "No Data", value: 1 }];
     }
-
-    // Group expenses by month for the selected year
-    const monthlyData = new Map<string, number>();
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    
-    expenses.forEach((exp) => {
-      const date = new Date(exp.date);
-      if (date.getFullYear().toString() === selectedYear || exp.description?.includes(`Seed ${selectedYear}`)) {
-        const monthKey = months[date.getMonth()];
-        if (exp.type === "expense") {
-          const current = monthlyData.get(monthKey) || 0;
-          monthlyData.set(monthKey, current + exp.amount);
-        }
-      }
-    });
-
-    return months.slice(0, 7).map((month) => ({
-      month,
-      amount: monthlyData.get(month) || 0,
+    return expensesSummary.byCategory.map(cat => ({
+      name: cat.category,
+      value: cat.amount
     }));
-  }, [expenses, selectedYear]);
+  }, [expensesSummary]);
+
+  const COLORS = [
+    "#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#0088fe", 
+    "#00c49f", "#ffbb28", "#ff7300", "#79d2f2", "#c48df2"
+  ];
 
   // Get recent transactions
   const recentTransactions = useMemo(() => {
@@ -167,49 +169,79 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
         </div>
       </div>
 
-      {/* Analytics Section */}
+      {/* Analytics Section - Pie Chart */}
       <div className="px-5 mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-foreground">Analytics</h2>
-          <button className="flex items-center gap-1 text-sm text-[var(--coral)] border border-[var(--coral)] rounded-full px-3 py-1.5 font-medium">
-            Year - {selectedYear}
-            <ChevronDown className="h-4 w-4" />
-          </button>
+          <h2 className="text-lg font-semibold text-foreground">Advanced Analytics</h2>
+          <div className="text-xs text-muted-foreground font-medium uppercase tracking-widest">{currentMonth} Spending</div>
         </div>
 
-        <div className="h-48 w-full">
+        <div className="h-64 w-full bg-card rounded-2xl border border-border p-4 shadow-sm relative">
+           {analyticsPieData[0].name === "No Data" && (
+            <div className="absolute inset-0 flex items-center justify-center z-10 bg-card/80 rounded-2xl">
+              <p className="text-muted-foreground font-medium">No expenses this month</p>
+            </div>
+           )}
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={analyticsData} barCategoryGap="20%">
-              <XAxis
-                dataKey="month"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
-              />
-              <YAxis hide />
-              <Bar dataKey="amount" radius={[6, 6, 0, 0]}>
-                {analyticsData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={entry.month === currentMonth ? "var(--purple)" : "var(--purple-light)"}
-                  />
+            <PieChart>
+              <Pie
+                data={analyticsPieData}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {analyticsPieData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
-              </Bar>
-            </BarChart>
+              </Pie>
+              <Tooltip 
+                formatter={(value: number) => `OMR ${value.toLocaleString("en-US", { minimumFractionDigits: 3 })}`}
+                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+              />
+              <Legend verticalAlign="bottom" height={36}/>
+            </PieChart>
           </ResponsiveContainer>
         </div>
-        
-        {/* Chart labels */}
-        <div className="flex justify-between px-2 -mt-2">
-          {analyticsData.map((item) => (
-            <div key={item.month} className="text-center">
-              <span className="text-xs text-muted-foreground font-medium">
-                OMR {item.amount >= 1000 ? (item.amount / 1000).toFixed(3) + 'k' : item.amount.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
+
+      {/* Budget Overview Section */}
+      {budgetStatus && budgetStatus.length > 0 && (
+        <div className="px-5 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-semibold text-foreground">Budget Overview</h2>
+            <button 
+              onClick={() => onNavigate("budget")}
+              className="text-xs text-[var(--coral)] font-bold uppercase tracking-widest"
+            >
+              Adjust
+            </button>
+          </div>
+          <div className="space-y-4">
+            {budgetStatus.slice(0, 3).map((budget: BudgetStatus) => (
+              <div key={budget.category} className="space-y-1.5">
+                <div className="flex justify-between text-xs font-bold uppercase tracking-wider">
+                  <span className="text-foreground">{budget.category}</span>
+                  <span className={budget.percentage > 90 ? "text-red-500" : "text-muted-foreground"}>
+                    {budget.actual.toLocaleString("en-US", { minimumFractionDigits: 3 })} / {budget.budget.toLocaleString("en-US", { minimumFractionDigits: 3 })}
+                  </span>
+                </div>
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full rounded-full transition-all duration-1000 ${
+                      budget.percentage > 100 ? "bg-red-500" : 
+                      budget.percentage > 80 ? "bg-orange-500" : "bg-[var(--purple)]"
+                    }`}
+                    style={{ width: `${Math.min(budget.percentage, 100)}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Transactions Section */}
       <div className="px-5 flex-1">

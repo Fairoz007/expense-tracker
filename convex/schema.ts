@@ -28,4 +28,12 @@ export default defineSchema({
     color: v.string(),
     icon: v.optional(v.string()),
   }).index("by_user", ["userId"]),
+
+  budgets: defineTable({
+    userId: v.id("users"),
+    category: v.string(),
+    amount: v.number(),
+    period: v.literal("monthly"),
+  }).index("by_user", ["userId"])
+    .index("by_user_and_category", ["userId", "category"]),
 });

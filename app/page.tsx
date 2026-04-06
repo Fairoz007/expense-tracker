@@ -13,9 +13,10 @@ import { ProfileScreen } from "@/components/screens/profile-screen";
 import { RemindersScreen } from "@/components/screens/reminders-screen";
 import { TransactionDetailScreen } from "@/components/screens/transaction-detail-screen";
 import { AllTransactionsScreen } from "@/components/screens/all-transactions-screen";
+import { BudgetScreen } from "@/components/screens/budget-screen";
 import { BottomNavigation } from "@/components/ui/bottom-navigation";
 
-type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders" | "transaction-detail" | "all-transactions";
+type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders" | "transaction-detail" | "all-transactions" | "budget";
 
 export default function HomePage() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -209,6 +210,12 @@ export default function HomePage() {
         return (
           <div className="mobile-container min-h-dvh screen-entry">
             <RemindersScreen onBack={() => setCurrentScreen("profile")} />
+          </div>
+        );
+      case "budget":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <BudgetScreen onBack={() => setCurrentScreen("profile")} />
           </div>
         );
       case "home":

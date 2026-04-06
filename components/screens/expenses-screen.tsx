@@ -14,6 +14,14 @@ interface ExpensesScreenProps {
   onNavigate: (screen: string, data?: any) => void;
 }
 
+interface BudgetStatus {
+  category: string;
+  budget: number;
+  actual: number;
+  remaining: number;
+  percentage: number;
+}
+
 export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
   const { user } = useUser();
   const [selectedDate, setSelectedDate] = useState(new Date().getDate());
@@ -37,6 +45,11 @@ export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
 
   const expensesSummary = useQuery(
     api.expenses.getExpensesSummary,
+    user?.id ? { clerkId: user.id, startDate: startOfMonth, endDate: endOfMonth } : "skip"
+  );
+
+  const budgetStatus = useQuery(
+    api.budgets.getBudgetStatus,
     user?.id ? { clerkId: user.id, startDate: startOfMonth, endDate: endOfMonth } : "skip"
   );
 
@@ -81,22 +94,27 @@ export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
     };
   }, [expenses, expensesSummary, balanceQuery]);
 
-  // Group expenses by category
+  // Group expenses by category and merge with budget data
   const expenseCategories = useMemo(() => {
     if (!expensesSummary?.byCategory || expensesSummary.byCategory.length === 0) {
       return [];
     }
 
-    return expensesSummary.byCategory.map((cat, index) => ({
-      id: index + 1,
-      name: cat.category,
-      paymentMethod: "Credit Card",
-      totalSpend: cat.amount,
-      totalBudget: cat.amount * 1.2, // Estimate budget as 120% of spending
-      percentage: Math.min(cat.percentage, 100),
-      date: monthDisplay,
-    }));
-  }, [expensesSummary, monthDisplay]);
+    return expensesSummary.byCategory.map((cat, index) => {
+      // Find budget for this category
+      const budgetInfo = (budgetStatus as BudgetStatus[] | undefined)?.find((b: BudgetStatus) => b.category === cat.category);
+      
+      return {
+        id: index + 1,
+        name: cat.category,
+        paymentMethod: "Credit Card",
+        totalSpend: cat.amount,
+        totalBudget: budgetInfo?.budget || 0,
+        percentage: budgetInfo ? budgetInfo.percentage : 0,
+        date: monthDisplay,
+      };
+    });
+  }, [expensesSummary, budgetStatus, monthDisplay]);
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
