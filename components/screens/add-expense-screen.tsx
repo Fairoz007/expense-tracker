@@ -64,6 +64,90 @@ export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
   const [selectedType, setSelectedType] = useState("Need");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isLoading, setIsLoading] = useState(false);
+  const [rawSms, setRawSms] = useState("");
+
+  const handleParseSms = () => {
+    if (!rawSms.trim()) {
+      toast.error("Please paste an SMS message first");
+      return;
+    }
+
+    const lines = rawSms.split('\n');
+    let parsedDescription = '';
+    let parsedAmount = '';
+    let parsedDate = '';
+
+    for (const line of lines) {
+      const lower = line.toLowerCase();
+      if (lower.startsWith('description') || lower.includes('description :')) {
+        parsedDescription = line.substring(line.indexOf(':') + 1).trim();
+      } else if (lower.startsWith('amount') || lower.includes('amount :')) {
+        let amtStr = line.substring(line.indexOf(':') + 1).trim();
+        amtStr = amtStr.replace(/omr/i, '').trim();
+        const amtMatch = amtStr.match(/(\d+\.?\d*)/);
+        if (amtMatch) parsedAmount = amtMatch[1];
+      } else if (lower.startsWith('date') || lower.includes('date/time :')) {
+        parsedDate = line.substring(line.indexOf(':') + 1).trim();
+      }
+    }
+
+    if (!parsedDescription && !parsedAmount) {
+      toast.error("Could not parse SMS format. Please check the text.");
+      return;
+    }
+
+    if (parsedDescription) {
+      const lowerNarration = parsedDescription.toLowerCase();
+      let autoDesc = parsedDescription;
+
+      if (lowerNarration.includes('nesto')) autoDesc = 'NESTO Hypermarket';
+      else if (lowerNarration.includes('qoot')) autoDesc = 'Al Qoot Hypermarket';
+      else if (lowerNarration.includes('friendi topup')) autoDesc = 'Friendi Topup';
+      else if (lowerNarration.includes('mpc wash')) autoDesc = 'MPC Wash';
+      else if (lowerNarration.includes('salary')) autoDesc = 'Salary';
+      else if (lowerNarration.includes('restaurant')) autoDesc = 'Restaurant';
+      else if (lowerNarration.includes('coffee')) autoDesc = 'Coffee Shop';
+      else if (lowerNarration.includes('shawarma')) autoDesc = 'Shawarma';
+      else if (lowerNarration.includes('wallet trx cr')) autoDesc = 'Wallet Credit';
+      else if (lowerNarration.includes('wallet trx')) autoDesc = 'Wallet Transfer';
+      else if (lowerNarration.includes('tax')) autoDesc = 'VAT';
+      else if (lowerNarration.includes('annual fees')) autoDesc = 'Annual Fee';
+      else if (lowerNarration.includes('advance housing')) autoDesc = 'Advance Housing';
+      else if (lowerNarration.includes('speed transfer')) autoDesc = 'Speed Transfer';
+      else if (lowerNarration.includes('international speed trans')) autoDesc = 'International Transfer';
+      else if (lowerNarration.includes('pos')) autoDesc = 'POS Purchase';
+
+      setTitle(autoDesc);
+      
+      let category = 'Shopping';
+      if (lowerNarration.includes('salary')) {
+        category = 'Income';
+        setTransactionType('income');
+      } else {
+        setTransactionType('expense');
+        if (lowerNarration.includes('resto') || lowerNarration.includes('coffee') || lowerNarration.includes('shawarma') || lowerNarration.includes('food')) category = 'Food And Drinks';
+        else if (lowerNarration.includes('friendi') || lowerNarration.includes('vodafone')) category = 'Bills';
+        else if (lowerNarration.includes('transfer') || lowerNarration.includes('international')) category = 'Transfer';
+      }
+      if (category !== 'Income') {
+         setSelectedCategory(category);
+      }
+    }
+
+    if (parsedAmount) {
+      setAmount(parsedAmount);
+    }
+
+    if (parsedDate) {
+      // Remove any timezone strings just in case, though the browser usually handles string dates correctly
+      const parsedD = new Date(parsedDate);
+      if (!isNaN(parsedD.getTime())) {
+        setSelectedDate(parsedD);
+      }
+    }
+    
+    toast.success("SMS Parsed and Form Filled!");
+  };
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-US", {
@@ -175,6 +259,27 @@ export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
 
       {/* Form */}
       <div className="flex-1 px-5 py-4 space-y-5 overflow-auto no-scrollbar">
+        {/* Paste SMS */}
+        <div>
+          <label className="text-xs font-bold text-[var(--coral)] mb-2 block uppercase tracking-wider">
+            Quick Add (Paste SMS)
+          </label>
+          <div className="flex flex-col gap-2 bg-card border border-border rounded-xl p-3">
+            <textarea
+              value={rawSms}
+              onChange={(e) => setRawSms(e.target.value)}
+              placeholder={"Paste bank SMS here...\ne.g. Description : RED OVEN\nAmount : OMR 0.4\nDate/Time : 05 APR 26"}
+              className="w-full bg-transparent outline-none text-foreground text-sm resize-none placeholder:text-muted-foreground h-20"
+            />
+            <button
+              onClick={handleParseSms}
+              className="self-end px-4 py-2 bg-[var(--coral)]/10 text-[var(--coral)] text-xs font-bold rounded-lg hover:bg-[var(--coral)]/20 transition-colors"
+            >
+              Autofill Form
+            </button>
+          </div>
+        </div>
+
         {/* Title */}
         <div>
           <label className="text-xs font-bold text-[var(--coral)] mb-2 block uppercase tracking-wider">
