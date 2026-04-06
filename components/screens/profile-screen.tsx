@@ -8,15 +8,11 @@ import { toast } from "sonner";
 import {
   ChevronLeft,
   User,
-  BadgeCheck,
-  Building2,
   DollarSign,
   Grid3X3,
-  Lock,
   Trash2,
+  Bell,
 } from "lucide-react";
-
-import { Bell } from "lucide-react";
 
 interface ProfileScreenProps {
   onBack: () => void;
