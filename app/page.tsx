@@ -25,20 +25,19 @@ export default function HomePage() {
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Check if user has completed onboarding and handle screen shortcuts
+  // Check if user has completed onboarding for this session
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const onboarded = localStorage.getItem("expense-tracker-onboarded");
       const urlParams = new URLSearchParams(window.location.search);
       const screenParam = urlParams.get("screen") as Screen;
       
-      if (onboarded === "true") {
-        setHasOnboarded(true);
-        if (isSignedIn) {
-           setCurrentScreen(screenParam || "home");
-        } else {
-           setCurrentScreen("signin");
-        }
+      if (isSignedIn) {
+         // If already signed in, we can skip onboarding if they've done it this session
+         // or if they used a direct link
+         if (screenParam) {
+           setCurrentScreen(screenParam);
+           setHasOnboarded(true);
+         }
       }
     }
   }, [isSignedIn]);
@@ -77,9 +76,8 @@ export default function HomePage() {
   }, [isSignedIn, hasOnboarded, currentScreen]);
 
   const handleOnboardingComplete = () => {
-    localStorage.setItem("expense-tracker-onboarded", "true");
     setHasOnboarded(true);
-    setCurrentScreen("signin");
+    setCurrentScreen(isSignedIn ? "home" : "signin");
   };
 
   const handleNavigation = (screen: string, data?: any) => {

@@ -66,7 +66,7 @@ export function TransactionDetailScreen({ transaction, onBack, onEdit, onDeleteS
   };
 
   return (
-    <div className="flex flex-col h-full bg-background overflow-hidden">
+    <div className="flex flex-col h-full bg-background overflow-hidden animate-in slide-in-from-right duration-300">
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-6 bg-[var(--cream)]">
         <button onClick={onBack} className="p-2 -ml-2 text-foreground">
