@@ -205,7 +205,7 @@ export function AddExpenseScreen({ onBack, initialData }: AddExpenseScreenProps)
       }
       onBack();
     } catch (error: any) {
-      console.error("[v0] Expense save error:", error);
+      console.error("Expense save error:", error);
       toast.error(error?.message || `Failed to ${initialData ? 'update' : 'add'} transaction. Please try again.`);
     } finally {
       setIsLoading(false);
