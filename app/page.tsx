@@ -10,9 +10,10 @@ import { ExpensesScreen } from "@/components/screens/expenses-screen";
 import { TotalExpenseScreen } from "@/components/screens/total-expense-screen";
 import { AddExpenseScreen } from "@/components/screens/add-expense-screen";
 import { ProfileScreen } from "@/components/screens/profile-screen";
+import { RemindersScreen } from "@/components/screens/reminders-screen";
 import { BottomNavigation } from "@/components/ui/bottom-navigation";
 
-type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile";
+type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders";
 
 export default function HomePage() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -21,14 +22,24 @@ export default function HomePage() {
   const [currentScreen, setCurrentScreen] = useState<Screen>("onboarding");
   const [hasOnboarded, setHasOnboarded] = useState(false);
 
-  // Check if user has completed onboarding
+  // Check if user has completed onboarding and handle screen shortcuts
   useEffect(() => {
-    const onboarded = localStorage.getItem("expense-tracker-onboarded");
-    if (onboarded === "true") {
-      setHasOnboarded(true);
-      setCurrentScreen(isSignedIn ? "home" : "signin");
+    if (typeof window !== "undefined") {
+      const onboarded = localStorage.getItem("expense-tracker-onboarded");
+      const urlParams = new URLSearchParams(window.location.search);
+      const screenParam = urlParams.get("screen") as Screen;
+      
+      if (onboarded === "true") {
+        setHasOnboarded(true);
+        if (isSignedIn) {
+           setCurrentScreen(screenParam || "home");
+        } else {
+           setCurrentScreen("signin");
+        }
+      }
     }
   }, [isSignedIn]);
+
 
   // Create or get user in Convex when signed in (non-blocking)
   useEffect(() => {
@@ -138,6 +149,15 @@ export default function HomePage() {
           onBack={() => setCurrentScreen("home")} 
           onNavigate={handleNavigation}
         />
+      </div>
+    );
+  }
+
+  // Show reminders screen
+  if (currentScreen === "reminders") {
+    return (
+      <div className="mobile-container min-h-dvh">
+        <RemindersScreen onBack={() => setCurrentScreen("profile")} />
       </div>
     );
   }
