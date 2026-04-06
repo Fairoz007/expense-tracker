@@ -8,7 +8,7 @@ interface RemindersScreenProps {
   onBack: () => void;
 }
 
-type Frequency = "daily" | "weekdays" | "weekends";
+type Frequency = "daily" | "hourly" | "every-6h" | "weekdays" | "weekends";
 type MotivationType = "gentle" | "strict" | "funny";
 
 export function RemindersScreen({ onBack }: RemindersScreenProps) {
@@ -66,7 +66,7 @@ export function RemindersScreen({ onBack }: RemindersScreenProps) {
     setTimeout(() => {
         setIsLoading(false);
         if (enabled) {
-            toast.success("Daily reminders set for " + reminderTime);
+            toast.success(`${frequency.replace("-", " ")} reminders set for ${reminderTime}`);
         } else {
             toast.info("Reminders turned off");
         }
@@ -190,14 +190,14 @@ export function RemindersScreen({ onBack }: RemindersScreenProps) {
                     </div>
                     <span className="font-medium">Frequency</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                    {(["daily", "weekdays", "weekends"] as Frequency[]).map((f) => (
+                <div className="flex flex-wrap gap-2">
+                    {(["daily", "hourly", "every-6h", "weekdays", "weekends"] as Frequency[]).map((f) => (
                         <button
                             key={f}
                             onClick={() => { setFrequency(f); saveSetting("expense-reminder-frequency", f); }}
-                            className={`py-2 rounded-xl text-xs font-semibold capitalize transition-all ${frequency === f ? 'bg-[var(--coral)] text-white shadow-md' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
+                            className={`px-3 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all border ${frequency === f ? 'bg-[var(--coral)] border-[var(--coral)] text-white shadow-lg' : 'bg-muted border-transparent text-muted-foreground hover:bg-muted/80'}`}
                         >
-                            {f}
+                            {f.replace("-", " ")}
                         </button>
                     ))}
                 </div>
