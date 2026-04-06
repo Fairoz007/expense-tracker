@@ -94,6 +94,7 @@ export default function HomePage() {
           Sign in to continue managing your expenses
         </p>
         <SignIn
+          routing="hash"
           appearance={{
             elements: {
               rootBox: "w-full max-w-[360px]",
@@ -133,7 +134,10 @@ export default function HomePage() {
   if (currentScreen === "profile") {
     return (
       <div className="mobile-container min-h-dvh">
-        <ProfileScreen onBack={() => setCurrentScreen("home")} />
+        <ProfileScreen 
+          onBack={() => setCurrentScreen("home")} 
+          onNavigate={handleNavigation}
+        />
       </div>
     );
   }

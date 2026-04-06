@@ -1,0 +1,9 @@
+NEXT_PUBLIC_CONVEX_URL=https://doting-starfish-431.convex.cloud
+NEXT_PUBLIC_CONVEX_SITE_URL=https://doting-starfish-431.convex.site
+
+CONVEX_DEPLOYMENT=dev:unique-gnu-807
+
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_bmV3LXNsdWctODAuY2xlcmsuYWNjb3VudHMuZGV2JA
+CLERK_SECRET_KEY=sk_test_r3PVYMIxYxlpsQ9JK1L3J5kMJcCVCEx6K0wcnxpJn8
+CLERK_JWT_ISSUER_DOMAIN=https://allowing-python-89.clerk.accounts.dev

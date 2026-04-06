@@ -1,0 +1,8 @@
+NEXT_PUBLIC_CONVEX_URL=https://doting-starfish-431.convex.cloud
+
+NEXT_PUBLIC_CONVEX_SITE_URL=https://doting-starfish-431.convex.site
+
+# Production Clerk credentials need to be added here
+# NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+# CLERK_SECRET_KEY=
+# CLERK_JWT_ISSUER_DOMAIN=
