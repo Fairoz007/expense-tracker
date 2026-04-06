@@ -7,6 +7,7 @@
   "background_color": "#F5EFE0",
   "theme_color": "#F5EFE0",
   "orientation": "portrait",
+  "scope": "/",
   "icons": [
     {
       "src": "/favicon-32x32.png",
@@ -16,12 +17,14 @@
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -39,6 +42,6 @@
       "url": "/?screen=expenses",
       "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
     }
-  ]
+  ],
+  "prefer_related_applications": false
 }
-

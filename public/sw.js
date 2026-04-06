@@ -1,4 +1,4 @@
-const CACHE_NAME = 'expense-tracker-v1';
+const CACHE_NAME = 'expense-tracker-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.json',
@@ -10,10 +10,11 @@ const ASSETS_TO_CACHE = [
   '/android-chrome-512x512.png',
 ];
 
-// Install Event - Cache Assets
+// Install Event - Cache initial assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
+      console.log('[Service Worker] Pre-caching app shell');
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
@@ -27,6 +28,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
+            console.log('[Service Worker] Removing old cache', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -36,34 +38,45 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch Event - Serve from cache, then network
+// Fetch Event
 self.addEventListener('fetch', (event) => {
-  // Skip cross-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) return;
+  const { request } = event;
+  const url = new URL(request.url);
 
-  // Skip API calls (Convex, Clerk, etc) - let them go to network
-  if (event.request.url.includes('/api/') || event.request.url.includes('convex.cloud') || event.request.url.includes('clerk')) {
+  // 1. Skip non-GET requests
+  if (request.method !== 'GET') return;
+
+  // 2. Skip cross-origin requests unless they are for assets we want to cache (like fonts)
+  if (!url.origin.includes(self.origin) && !url.hostname.includes('fonts.googleapis.com') && !url.hostname.includes('fonts.gstatic.com')) {
     return;
   }
 
+  // 3. Skip API calls and dynamic auth routes
+  if (
+    url.pathname.startsWith('/api/') || 
+    url.hostname.includes('convex.cloud') || 
+    url.hostname.includes('clerk') ||
+    url.hostname.includes('vercel-analytics')
+  ) {
+    return;
+  }
+
+  // 4. Stale-While-Revalidate Strategy for most assets
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request).then((response) => {
-        // Don't cache non-successful responses or non-GET requests
-        if (!response || response.status !== 200 || response.type !== 'basic' || event.request.method !== 'GET') {
-          return response;
-        }
-
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(request).then((cachedResponse) => {
+        const fetchPromise = fetch(request).then((networkResponse) => {
+          // If valid response, clone it and put in cache
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            cache.put(request, networkResponse.clone());
+          }
+          return networkResponse;
+        }).catch(() => {
+            // Silently fail network fetch if offline
         });
 
-        return response;
+        // Return cached response immediately if it exists, otherwise wait for network
+        return cachedResponse || fetchPromise;
       });
     })
   );
@@ -74,9 +87,9 @@ self.addEventListener('push', (event) => {
   const data = event.data?.json() || {};
   const title = data.title || 'Expense Reminder';
   const options = {
-    body: data.body || 'Don\'t forget to track your expenses today!',
-    icon: '/icon-light-32x32.png',
-    badge: '/icon-light-32x32.png',
+    body: data.body || "Don't forget to track your expenses today!",
+    icon: '/android-chrome-192x192.png',
+    badge: '/favicon-32x32.png',
     vibrate: [200, 100, 200],
     data: {
         url: '/'
@@ -104,4 +117,3 @@ self.addEventListener('notificationclick', (event) => {
     })
   );
 });
-

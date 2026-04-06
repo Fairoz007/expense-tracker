@@ -23,8 +23,8 @@ export function BottomNavigation({
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50">
-      <div className="max-w-[430px] mx-auto px-4 py-3">
+    <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50 pb-[env(safe-area-inset-bottom,0)]">
+      <div className="max-w-[430px] mx-auto px-4 py-2 select-none">
         <div className="flex items-center justify-between">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -35,7 +35,7 @@ export function BottomNavigation({
                 <button
                   key={item.id}
                   onClick={() => onNavigate(item.id)}
-                  className="w-14 h-14 -mt-6 rounded-full bg-[var(--coral)] flex items-center justify-center shadow-lg"
+                  className="w-14 h-14 -mt-8 rounded-full bg-[var(--coral)] flex items-center justify-center shadow-lg active-scale focus:outline-none"
                 >
                   <Icon className="h-6 w-6 text-white" />
                 </button>
@@ -46,12 +46,12 @@ export function BottomNavigation({
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className="flex flex-col items-center gap-1 p-2"
+                className="flex flex-col items-center gap-1 p-2 active-scale focus:outline-none"
               >
                 <Icon
                   className={cn(
                     "h-6 w-6 transition-colors",
-                    isActive ? "text-[var(--coral)]" : "text-muted-foreground"
+                    isActive ? "text-[var(--coral)]" : "text-muted-foreground hover:text-foreground"
                   )}
                 />
               </button>

@@ -96,6 +96,10 @@
   max-width: 430px;
   margin: 0 auto;
   min-height: 100dvh;
+  /* Use safe-area-inset to handle notches on iOS/modern Android */
+  padding-top: env(safe-area-inset-top, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  background-color: var(--background);
 }
 
 /* Hide scrollbar for cleaner mobile look */
@@ -105,4 +109,60 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* PWA Smoothness Enhancements */
+body {
+  /* Prevent pull-to-refresh in browser when app is in standalone mode */
+  overscroll-behavior-y: none;
+  /* Improve font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Disable text selection on UI elements for a native feel */
+  -webkit-touch-callout: none;
+  /* Standard webkit tap highlight color */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Utility to prevent selection on UI elements */
+.select-none {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Utility for interactive elements focus/active states */
+.active-scale {
+  transition: transform 0.1s ease;
+}
+.active-scale:active {
+  transform: scale(0.96);
+}
+
+/* Handle different display modes */
+@media (display-mode: standalone) {
+  /* Standalone-specific adjustments if needed */
+  .pwa-only {
+    display: block;
+  }
+}
+
+/* Screen transition effect */
+.screen-entry {
+  animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure images and avatars don't flash */
+img {
+  content-visibility: auto;
 }

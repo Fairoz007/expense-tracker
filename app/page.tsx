@@ -33,8 +33,6 @@ export default function HomePage() {
       const screenParam = urlParams.get("screen") as Screen;
       
       if (isSignedIn) {
-         // If already signed in, we can skip onboarding if they've done it this session
-         // or if they used a direct link
          if (screenParam) {
            setCurrentScreen(screenParam);
            setHasOnboarded(true);
@@ -47,17 +45,14 @@ export default function HomePage() {
   // Create or get user in Convex when signed in (non-blocking)
   useEffect(() => {
     if (isSignedIn && user) {
-      // Run in background, don't block UI
       createOrGetUser({
         clerkId: user.id,
         email: user.primaryEmailAddress?.emailAddress || "",
         name: `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User",
         imageUrl: user.imageUrl,
       }).then(() => {
-        // Seed initial data (only happens if user has no expenses)
         seedInitialData({ clerkId: user.id }).catch(() => {});
       }).catch((err) => {
-        // Silently handle errors - Convex may not be connected
         console.log("[v0] Convex user sync skipped:", err?.message || "Not connected");
       });
     }
@@ -86,7 +81,6 @@ export default function HomePage() {
       setSelectedTransaction(data);
       setIsEditing(false);
     } else if (screen === "add" && data) {
-      // This is for editing from the detail screen
       setSelectedTransaction(data);
       setIsEditing(true);
     } else if (screen === "add") {
@@ -106,13 +100,17 @@ export default function HomePage() {
 
   // Show onboarding for first-time users
   if (currentScreen === "onboarding" && !hasOnboarded) {
-    return <OnboardingScreen onComplete={handleOnboardingComplete} />;
+    return (
+        <div className="screen-entry">
+            <OnboardingScreen onComplete={handleOnboardingComplete} />
+        </div>
+    );
   }
 
   // Show sign in if not authenticated
   if (!isSignedIn) {
     return (
-      <div className="mobile-container flex flex-col items-center justify-center min-h-dvh bg-[var(--cream)] p-6">
+      <div className="mobile-container screen-entry flex flex-col items-center justify-center min-h-dvh bg-[var(--cream)] p-6">
         <h1 className="text-2xl font-bold text-foreground mb-2">Welcome Back</h1>
         <p className="text-muted-foreground text-center mb-8">
           Sign in to continue managing your expenses
@@ -136,112 +134,102 @@ export default function HomePage() {
     );
   }
 
-  // Show total expense screen
-  if (currentScreen === "total-expense") {
-    return (
-      <div className="mobile-container min-h-dvh">
-        <TotalExpenseScreen 
-          onBack={() => setCurrentScreen("expenses")} 
-          onNavigate={(screen) => handleNavigation(screen)}
-        />
-      </div>
-    );
-  }
+  // Helper to wrap screen in container + entry animation
+  const renderScreen = () => {
+    switch (currentScreen) {
+      case "total-expense":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <TotalExpenseScreen 
+              onBack={() => setCurrentScreen("expenses")} 
+              onNavigate={(screen) => handleNavigation(screen)}
+            />
+          </div>
+        );
+      case "add":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <AddExpenseScreen 
+              onBack={() => {
+                if (isEditing) {
+                  setCurrentScreen("transaction-detail");
+                } else {
+                  setCurrentScreen("home");
+                }
+              }} 
+              initialData={isEditing ? {
+                id: selectedTransaction._id,
+                amount: selectedTransaction.amount,
+                category: selectedTransaction.category,
+                description: selectedTransaction.description,
+                date: selectedTransaction.date,
+                type: selectedTransaction.type,
+              } : undefined}
+            />
+          </div>
+        );
+      case "transaction-detail":
+        if (!selectedTransaction) return null;
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <TransactionDetailScreen 
+              transaction={selectedTransaction}
+              onBack={() => setCurrentScreen("home")}
+              onEdit={(tx) => {
+                setSelectedTransaction(tx);
+                setIsEditing(true);
+                setCurrentScreen("add");
+              }}
+              onDeleteSuccess={() => setCurrentScreen("home")}
+            />
+          </div>
+        );
+      case "all-transactions":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <AllTransactionsScreen 
+              onBack={() => setCurrentScreen("home")}
+              onTransactionClick={(tx) => {
+                setSelectedTransaction(tx);
+                setCurrentScreen("transaction-detail");
+              }}
+            />
+          </div>
+        );
+      case "profile":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <ProfileScreen 
+              onBack={() => setCurrentScreen("home")} 
+              onNavigate={handleNavigation}
+            />
+          </div>
+        );
+      case "reminders":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            <RemindersScreen onBack={() => setCurrentScreen("profile")} />
+          </div>
+        );
+      case "home":
+      case "expenses":
+      case "calendar":
+        return (
+          <div className="mobile-container min-h-dvh screen-entry">
+            {currentScreen === "home" && <HomeScreen onNavigate={handleNavigation} />}
+            {currentScreen === "expenses" && <ExpensesScreen onNavigate={handleNavigation} />}
+            {currentScreen === "calendar" && <ExpensesScreen onNavigate={handleNavigation} />}
+            
+            <BottomNavigation
+              currentScreen={currentScreen as "home" | "expenses" | "add" | "calendar" | "profile"}
+              onNavigate={(screen) => setCurrentScreen(screen)}
+            />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
-  // Show add/edit expense screen
-  if (currentScreen === "add") {
-    return (
-      <div className="mobile-container min-h-dvh">
-        <AddExpenseScreen 
-          onBack={() => {
-            if (isEditing) {
-              setCurrentScreen("transaction-detail");
-            } else {
-              setCurrentScreen("home");
-            }
-          }} 
-          initialData={isEditing ? {
-            id: selectedTransaction._id,
-            amount: selectedTransaction.amount,
-            category: selectedTransaction.category,
-            description: selectedTransaction.description,
-            date: selectedTransaction.date,
-            type: selectedTransaction.type,
-          } : undefined}
-        />
-      </div>
-    );
-  }
-
-  // Show transaction detail screen
-  if (currentScreen === "transaction-detail" && selectedTransaction) {
-    return (
-      <div className="mobile-container min-h-dvh">
-        <TransactionDetailScreen 
-          transaction={selectedTransaction}
-          onBack={() => {
-             // Go back to wherever we came from
-             // This is a bit tricky, but for simplicity let's go home
-             setCurrentScreen("home");
-          }}
-          onEdit={(tx) => {
-            setSelectedTransaction(tx);
-            setIsEditing(true);
-            setCurrentScreen("add");
-          }}
-          onDeleteSuccess={() => setCurrentScreen("home")}
-        />
-      </div>
-    );
-  }
-
-  // Show all transactions screen
-  if (currentScreen === "all-transactions") {
-    return (
-      <div className="mobile-container min-h-dvh">
-        <AllTransactionsScreen 
-          onBack={() => setCurrentScreen("home")}
-          onTransactionClick={(tx) => {
-            setSelectedTransaction(tx);
-            setCurrentScreen("transaction-detail");
-          }}
-        />
-      </div>
-    );
-  }
-
-  // Show profile screen
-  if (currentScreen === "profile") {
-    return (
-      <div className="mobile-container min-h-dvh">
-        <ProfileScreen 
-          onBack={() => setCurrentScreen("home")} 
-          onNavigate={handleNavigation}
-        />
-      </div>
-    );
-  }
-
-  // Show reminders screen
-  if (currentScreen === "reminders") {
-    return (
-      <div className="mobile-container min-h-dvh">
-        <RemindersScreen onBack={() => setCurrentScreen("profile")} />
-      </div>
-    );
-  }
-
-  // Main app with bottom navigation
-  return (
-    <div className="mobile-container min-h-dvh">
-      {currentScreen === "home" && <HomeScreen onNavigate={handleNavigation} />}
-      {currentScreen === "expenses" && <ExpensesScreen onNavigate={handleNavigation} />}
-      {currentScreen === "calendar" && <ExpensesScreen onNavigate={handleNavigation} />}
-      
-      <BottomNavigation
-        currentScreen={currentScreen as "home" | "expenses" | "add" | "calendar" | "profile"}
-        onNavigate={(screen) => setCurrentScreen(screen)}
-      />
-    </div>
-  );
+  return <>{renderScreen()}</>;
 }
