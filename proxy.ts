@@ -1,12 +1,11 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher, auth } from "@clerk/nextjs/server";
 
 // Using the new Next.js 16 terminology: 'proxy' instead of 'middleware'
 const isPublicRoute = createRouteMatcher(["/"]);
 
-export const proxy = clerkMiddleware(async (auth, request) => {
+export const proxy = clerkMiddleware(async (authHelper, request) => {
   if (!isPublicRoute(request)) {
-    // In v6, await auth.protect() is correct if auth is the auth object helper
-    // However, calling it with await ensures we wait for any async checks
+    // In v6, await auth.protect() is directly available from the imported auth
     await auth.protect();
   }
 });
