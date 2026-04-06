@@ -216,7 +216,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-foreground">Transactions</h2>
           <button 
-            onClick={() => onNavigate("expenses")}
+            onClick={() => onNavigate("all-transactions")}
             className="text-sm text-muted-foreground font-medium hover:text-foreground transition-colors"
           >
             View All

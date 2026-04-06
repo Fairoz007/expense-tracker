@@ -12,9 +12,10 @@ import { AddExpenseScreen } from "@/components/screens/add-expense-screen";
 import { ProfileScreen } from "@/components/screens/profile-screen";
 import { RemindersScreen } from "@/components/screens/reminders-screen";
 import { TransactionDetailScreen } from "@/components/screens/transaction-detail-screen";
+import { AllTransactionsScreen } from "@/components/screens/all-transactions-screen";
 import { BottomNavigation } from "@/components/ui/bottom-navigation";
 
-type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders" | "transaction-detail";
+type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders" | "transaction-detail" | "all-transactions";
 
 export default function HomePage() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -139,7 +140,10 @@ export default function HomePage() {
   if (currentScreen === "total-expense") {
     return (
       <div className="mobile-container min-h-dvh">
-        <TotalExpenseScreen onBack={() => setCurrentScreen("expenses")} />
+        <TotalExpenseScreen 
+          onBack={() => setCurrentScreen("expenses")} 
+          onNavigate={(screen) => handleNavigation(screen)}
+        />
       </div>
     );
   }
@@ -175,13 +179,32 @@ export default function HomePage() {
       <div className="mobile-container min-h-dvh">
         <TransactionDetailScreen 
           transaction={selectedTransaction}
-          onBack={() => setCurrentScreen("home")}
+          onBack={() => {
+             // Go back to wherever we came from
+             // This is a bit tricky, but for simplicity let's go home
+             setCurrentScreen("home");
+          }}
           onEdit={(tx) => {
             setSelectedTransaction(tx);
             setIsEditing(true);
             setCurrentScreen("add");
           }}
           onDeleteSuccess={() => setCurrentScreen("home")}
+        />
+      </div>
+    );
+  }
+
+  // Show all transactions screen
+  if (currentScreen === "all-transactions") {
+    return (
+      <div className="mobile-container min-h-dvh">
+        <AllTransactionsScreen 
+          onBack={() => setCurrentScreen("home")}
+          onTransactionClick={(tx) => {
+            setSelectedTransaction(tx);
+            setCurrentScreen("transaction-detail");
+          }}
         />
       </div>
     );

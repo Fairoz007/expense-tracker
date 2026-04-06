@@ -14,9 +14,10 @@ const COLORS = ["var(--purple)", "var(--coral)", "var(--navy)", "#4CAF50", "#FF9
 
 interface TotalExpenseScreenProps {
   onBack: () => void;
+  onNavigate: (screen: string) => void;
 }
 
-export function TotalExpenseScreen({ onBack }: TotalExpenseScreenProps) {
+export function TotalExpenseScreen({ onBack, onNavigate }: TotalExpenseScreenProps) {
   const { user } = useUser();
   const [selectedDate, setSelectedDate] = useState(new Date().getDate());
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -157,7 +158,12 @@ export function TotalExpenseScreen({ onBack }: TotalExpenseScreenProps) {
       <div className="px-5 flex-1">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-foreground">Analytics</h2>
-          <button className="text-sm text-muted-foreground">View All</button>
+          <button 
+            onClick={() => onNavigate("all-transactions")}
+            className="text-sm text-muted-foreground font-bold hover:text-foreground transition-all"
+          >
+            View All
+          </button>
         </div>
 
         {/* Pie Chart */}
