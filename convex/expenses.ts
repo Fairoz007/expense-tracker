@@ -48,18 +48,42 @@ export const getExpenses = query({
       return [];
     }
 
-    let expenses = await ctx.db
+    if (args.startDate !== undefined && args.endDate !== undefined) {
+      return await ctx.db
+        .query("expenses")
+        .withIndex("by_user_and_date", (q) =>
+          q.eq("userId", user._id).gte("date", args.startDate!).lte("date", args.endDate!)
+        )
+        .collect();
+    }
+
+    return await ctx.db
       .query("expenses")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
       .collect();
+  },
+});
 
-    if (args.startDate && args.endDate) {
-      expenses = expenses.filter(
-        (e) => e.date >= args.startDate! && e.date <= args.endDate!
-      );
+export const getRecentExpenses = query({
+  args: {
+    clerkId: v.string(),
+    limit: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
+      .first();
+
+    if (!user) {
+      return [];
     }
 
-    return expenses;
+    return await ctx.db
+      .query("expenses")
+      .withIndex("by_user_and_date", (q) => q.eq("userId", user._id))
+      .order("desc")
+      .take(args.limit);
   },
 });
 
@@ -79,14 +103,12 @@ export const getExpensesSummary = query({
       return { totalIncome: 0, totalExpenses: 0, byCategory: [] };
     }
 
-    const expenses = await ctx.db
+    const filtered = await ctx.db
       .query("expenses")
-      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .withIndex("by_user_and_date", (q) =>
+        q.eq("userId", user._id).gte("date", args.startDate).lte("date", args.endDate)
+      )
       .collect();
-
-    const filtered = expenses.filter(
-      (e) => e.date >= args.startDate && e.date <= args.endDate
-    );
 
     const totalIncome = filtered
       .filter((e) => e.type === "income")
@@ -113,6 +135,32 @@ export const getExpensesSummary = query({
     );
 
     return { totalIncome, totalExpenses, byCategory };
+  },
+});
+
+export const getBalance = query({
+  args: { clerkId: v.string() },
+  handler: async (ctx, args) => {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
+      .first();
+
+    if (!user) return 0;
+
+    const expenses = await ctx.db
+      .query("expenses")
+      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .collect();
+
+    const income = expenses
+      .filter((e) => e.type === "income")
+      .reduce((sum, e) => sum + e.amount, 0);
+    const spent = expenses
+      .filter((e) => e.type === "expense")
+      .reduce((sum, e) => sum + e.amount, 0);
+
+    return income - spent;
   },
 });
 

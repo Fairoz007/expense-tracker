@@ -10,9 +10,10 @@ import { ExpensesScreen } from "@/components/screens/expenses-screen";
 import { TotalExpenseScreen } from "@/components/screens/total-expense-screen";
 import { AddExpenseScreen } from "@/components/screens/add-expense-screen";
 import { ProfileScreen } from "@/components/screens/profile-screen";
+import { RemindersScreen } from "@/components/screens/reminders-screen";
 import { BottomNavigation } from "@/components/ui/bottom-navigation";
 
-type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile";
+type Screen = "onboarding" | "signin" | "home" | "expenses" | "total-expense" | "add" | "calendar" | "profile" | "reminders";
 
 export default function HomePage() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -31,20 +32,52 @@ export default function HomePage() {
 
   // Create or get user in Convex when signed in (non-blocking)
   useEffect(() => {
-    if (isSignedIn && user) {
+    if (isSignedIn && user?.id) {
       // Run in background, don't block UI
       createOrGetUser({
         clerkId: user.id,
         email: user.primaryEmailAddress?.emailAddress || "",
-        name: `${user.firstName || ""} ${user.lastName || ""}`.trim() || "User",
+        name: `${user.firstName || ""} ${user.lastName || ""}`.trim() || user.username || "User",
         imageUrl: user.imageUrl,
-      }).then(() => {
       }).catch((err) => {
         // Silently handle errors - Convex may not be connected
         console.log("[v0] Convex user sync skipped:", err?.message || "Not connected");
       });
     }
-  }, [isSignedIn, user, createOrGetUser]);
+  }, [isSignedIn, user?.id, createOrGetUser]);
+
+  // Background reminder check
+  useEffect(() => {
+    if (!isSignedIn) return;
+
+    const checkReminder = () => {
+      const enabled = localStorage.getItem("expense-reminder-enabled") === "true";
+      if (!enabled) return;
+
+      const reminderTime = localStorage.getItem("expense-reminder-time") || "20:00";
+      const [rHours, rMinutes] = reminderTime.split(":").map(Number);
+      
+      const now = new Date();
+      if (now.getHours() === rHours && now.getMinutes() === rMinutes) {
+        if ("Notification" in window && Notification.permission === "granted") {
+          // Check if we already notified this minute to avoid duplicates
+          const lastNotified = localStorage.getItem("expense-last-notified-at");
+          const nowStr = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}-${now.getHours()}-${now.getMinutes()}`;
+          
+          if (lastNotified !== nowStr) {
+            new Notification("Time to track your expenses!", {
+              body: "Stay on top of your budget. Add your transactions for today.",
+              icon: "/icon-light-32x32.png",
+            });
+            localStorage.setItem("expense-last-notified-at", nowStr);
+          }
+        }
+      }
+    };
+
+    const interval = setInterval(checkReminder, 30000); // Check every 30 seconds
+    return () => clearInterval(interval);
+  }, [isSignedIn]);
 
   // Update screen based on auth state
   useEffect(() => {
@@ -131,7 +164,16 @@ export default function HomePage() {
   if (currentScreen === "profile") {
     return (
       <div className="mobile-container min-h-dvh">
-        <ProfileScreen onBack={() => setCurrentScreen("home")} />
+        <ProfileScreen onBack={() => setCurrentScreen("home")} onNavigate={handleNavigation} />
+      </div>
+    );
+  }
+
+  // Show reminders screen
+  if (currentScreen === "reminders") {
+    return (
+      <div className="mobile-container min-h-dvh">
+        <RemindersScreen onBack={() => setCurrentScreen("profile")} />
       </div>
     );
   }

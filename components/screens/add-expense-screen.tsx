@@ -222,12 +222,12 @@ export function AddExpenseScreen({ onBack }: AddExpenseScreenProps) {
             Amount
           </label>
           <div className="flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 font-bold">
-            <span className="text-lg text-muted-foreground">$</span>
+            <span className="text-lg text-muted-foreground">OMR</span>
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder="0.00"
+              placeholder="0.000"
               className="flex-1 bg-transparent outline-none text-foreground text-lg placeholder:text-muted-foreground"
             />
             <button className="flex items-center gap-1 text-muted-foreground border-l border-border pl-3">

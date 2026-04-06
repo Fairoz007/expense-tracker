@@ -3,1212 +3,1212 @@
   "expenses": [
     {
       "amount": 100,
-      "category": "Income",
-      "description": "Transfer Advance Housing AL SHOMOUKH INTERNATIONAL SCHOOL LFT260494ZR0TXRJ",
+      "category": "Salary",
+      "description": "Advance Housing",
       "date": 1771358400000,
       "type": "income"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT26050BG8DHW2Q",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1771444800000,
       "type": "expense"
     },
     {
       "amount": 1.889,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013038965900 MUHAMMAD FAIQ HAMID FT26050843990009",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1771444800000,
       "type": "expense"
     },
     {
       "amount": 4,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT2605087B77DFJ",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1771444800000,
       "type": "expense"
     },
     {
       "amount": 5.904,
-      "category": "Grocery",
-      "description": "POS 001673-NESTO HYPERMARKET PO BOMCT POS26053089NKG2B0",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1771704000000,
       "type": "expense"
     },
     {
       "amount": 1.8,
       "category": "Shopping",
-      "description": "POS 836315-MAZAYA AL ASIMAH DISTIN POS26053120RRY2YS",
+      "description": "POS Purchase",
       "date": 1771704000000,
       "type": "expense"
     },
     {
       "amount": 0.3,
       "category": "Shopping",
-      "description": "POS 847202-MAZAYA AL ASIMAH DISTIN POS260530FS8449F5",
+      "description": "POS Purchase",
       "date": 1771704000000,
       "type": "expense"
     },
     {
       "amount": 2.05,
-      "category": "Others",
-      "description": "POS 863065-SARAYA ALHAIL UNITED AL K POS26053041DWMRSN",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1771704000000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Transfer 75012589-Vodafone Mobile Postpaid OMAN NAT ENG AND INVESTMENT CO LFT260",
+      "category": "Bills",
+      "description": "POS Purchase",
       "date": 1771790400000,
       "type": "expense"
     },
     {
       "amount": 0.05,
-      "category": "Bills",
-      "description": "Oman Value Added Tax",
+      "category": "Shopping",
+      "description": "VAT",
       "date": 1771790400000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Transport",
-      "description": "Debit Card Annual fees",
+      "category": "Shopping",
+      "description": "Annual Fee",
       "date": 1771790400000,
       "type": "expense"
     },
     {
       "amount": 1.7,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013079110400 MPC WASH AC 0307 FT26054903952899",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1771790400000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "POS 702325-GOLDEN PILLARS OF EXCELAL H POS260550NDZW5Z7B",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1771876800000,
       "type": "expense"
     },
     {
       "amount": 1.26,
-      "category": "Food And Drinks",
-      "description": "POS 893408-TELY RESTAURANT MABE POS260550LKZFZ5XP",
+      "category": "Shopping",
+      "description": "Restaurant",
       "date": 1771876800000,
       "type": "expense"
     },
     {
       "amount": 75,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013092568159 SREEMATH MADURANGA GUNAPALA MANDAWA FT26055458071068",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1771876800000,
       "type": "expense"
     },
     {
       "amount": 22,
-      "category": "Income",
-      "description": "Wallet Trx Cr BMCT013095274384 BM FT26055005992135",
+      "category": "Salary",
+      "description": "Wallet Credit",
       "date": 1771876800000,
       "type": "income"
     },
     {
       "amount": 1.26,
-      "category": "Food And Drinks",
-      "description": "POS 041226-TELY RESTAURANT MABE POS2605611ZHZLR5W",
+      "category": "Shopping",
+      "description": "Restaurant",
       "date": 1771963200000,
       "type": "expense"
     },
     {
       "amount": 0.3,
-      "category": "Others",
-      "description": "POS 072942-SARAYA AL HAIL UNITED A POS260560FS83VSV9",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1771963200000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013106366040 ANOWAR HOSSAIN FT26056214036922",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1771963200000,
       "type": "expense"
     },
     {
       "amount": 0.325,
-      "category": "Grocery",
-      "description": "POS 083824-AL QOOT HYPERMARKET BIDOman POS2605604TDJG0MR",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1771963200000,
       "type": "expense"
     },
     {
       "amount": 1.3,
-      "category": "Food And Drinks",
-      "description": "POS 367961-AWAFI SHAWARMA AL HAIL OM POS2605600CX448NT",
+      "category": "Food",
+      "description": "Shawarma",
       "date": 1771963200000,
       "type": "expense"
     },
     {
       "amount": 1.923,
-      "category": "Grocery",
-      "description": "POS 021015-NESTO HYPERMARKET PO BOMCT POS26057047YF2FSN",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1772049600000,
       "type": "expense"
     },
     {
       "amount": 1.6,
-      "category": "Others",
-      "description": "POS 238857-RESTURANT ALHA POS26057144Q5HPFH",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772049600000,
       "type": "expense"
     },
     {
       "amount": 0.4,
-      "category": "Others",
-      "description": "POS 314045-ABRAJ ALDYAR UNITED COM POS260600YMJBSZTY",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772308800000,
       "type": "expense"
     },
     {
       "amount": 3.06,
-      "category": "Others",
-      "description": "POS 254925-ENEBA 840.777.000@0.00393822 212438489473601.030001",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772308800000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Others",
-      "description": "POS 623165-UDUPI HOME GHAL POS26060110NRFTG3",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772308800000,
       "type": "expense"
     },
     {
       "amount": 0.2,
-      "category": "Others",
-      "description": "POS 436272-ABRAJ ALDYAR UNITED COM POS260600F7DXP9RK",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772308800000,
       "type": "expense"
     },
     {
       "amount": 2.415,
-      "category": "Food And Drinks",
-      "description": "POS 776103-ROYAL FOOD COURT LLC AL POS26060134PZ9788",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772308800000,
       "type": "expense"
     },
     {
       "amount": 0.325,
-      "category": "Grocery",
-      "description": "POS 327782-AL QOOT HYPERMARKET BIDOman POS260600MT3RV0CY",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1772308800000,
       "type": "expense"
     },
     {
       "amount": 0.686,
-      "category": "Grocery",
-      "description": "POS 285045-NESTO HYPERMARKET PO BOMCT POS260610NXVM6HRF",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1772395200000,
       "type": "expense"
     },
     {
       "amount": 0.3,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013166340295 MPC WASH AC 0307 FT26061014715396",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1772395200000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT260614ZTVZ7ML",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1772395200000,
       "type": "expense"
     },
     {
       "amount": 1.1,
-      "category": "Others",
-      "description": "POS 782804-SAD AL AMARAT PO BOX 37MCT POS2606108LLXDZBJ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772395200000,
       "type": "expense"
     },
     {
       "amount": 0.5,
-      "category": "Others",
-      "description": "POS 096288-MUSCAT AL MUMAYAZA AL S POS2606114R38733L",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772395200000,
       "type": "expense"
     },
     {
       "amount": 0.3,
-      "category": "Others",
-      "description": "POS 692885-SAD AL AMARAT PO BOX 37MCT POS260620F80FFQB1",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772481600000,
       "type": "expense"
     },
     {
       "amount": 1.3,
-      "category": "Others",
-      "description": "POS 868788-Sand Beach World Tradin POS260620W8GX5NPW",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772481600000,
       "type": "expense"
     },
     {
       "amount": 0.635,
-      "category": "Grocery",
-      "description": "POS 701867-NESTO HYPERMARKET PO BOMCT POS2606301Q9Q3D2Q",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1772568000000,
       "type": "expense"
     },
     {
       "amount": 1.3,
-      "category": "Others",
-      "description": "POS 857387-Sand Beach World Tradin POS260630K4GQZGZ4",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772568000000,
       "type": "expense"
     },
     {
       "amount": 0.2,
-      "category": "Others",
-      "description": "POS 858682-Sand Beach World Tradin POS260630J84041ZN",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772568000000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Others",
-      "description": "POS 863971-Sand Beach World Tradin POS2606311YTP4G26",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772568000000,
       "type": "expense"
     },
     {
       "amount": 400,
-      "category": "Income",
-      "description": "SALARY SALA Monthly Salary - AL SHOMOUKH GLOBAL 212493366336118.070001",
+      "category": "Salary",
+      "description": "Salary",
       "date": 1772654400000,
       "type": "income"
     },
     {
       "amount": 8,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT26064P4C49LDF",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 22,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013195586362 MOHAMMED HAFEEZ ISMAIL FT26064802296781",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 23.154,
-      "category": "Grocery",
-      "description": "POS 790745-NESTO HYPERMARKET PO BOMCT POS260640369J74Y6",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 13,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013198897093 MUHAMMAD MAHTAB ALAM FT26064107900161",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 1.525,
-      "category": "Grocery",
-      "description": "POS 929669-AL QOOT HYPERMARKET BIDOman POS2606410J2MG83B",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 0.4,
-      "category": "Food And Drinks",
-      "description": "POS 644598-RED OVEN COFFEE SHOP AL H POS260640369L43QH",
+      "category": "Food",
+      "description": "Coffee Shop",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 1.2,
-      "category": "Others",
-      "description": "POS 095810-RESTURANT ALHA POS2606403WSPF57B",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772654400000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Bills",
-      "description": "Oman Value Added Tax AC-0307081039060016 INR.7,000.00@0.00422800 FT2606735173267",
+      "category": "Shopping",
+      "description": "VAT",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "International Speed trans AC-0307081039060016 INR.7,000.00@0.00422800 FT26067351",
+      "category": "Transfer",
+      "description": "International Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 29.596,
-      "category": "Others",
-      "description": "Speed Transfer IMPS - FAIROZ FAISAL INR.7,000.00@0.00422800 FT26067351732671",
+      "category": "Transfer",
+      "description": "Speed Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Bills",
-      "description": "Oman Value Added Tax AC-0307081039060016 INR.42,000.00@0.00422800 FT260675507750",
+      "category": "Shopping",
+      "description": "VAT",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "International Speed trans AC-0307081039060016 INR.42,000.00@0.00422800 FT2606755",
+      "category": "Transfer",
+      "description": "International Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 177.576,
-      "category": "Others",
-      "description": "Speed Transfer IMPS - FAIROZ FAISAL INR.42,000.00@0.00422800 FT26067550775085",
+      "category": "Transfer",
+      "description": "Speed Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "POS 292820-MUSCAT AL MUMAYAZA AL S POS26067068LPPKHJ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013206466809 NASER MAGDY ABDELKHALEQ ALI FT26067636010690",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 6.55,
-      "category": "Others",
-      "description": "POS 699227-RIAL CENTER AL A POS2606705026MT8L",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 1.6,
-      "category": "Others",
-      "description": "POS 046367-Sand Beach World Tradin POS260670FFS8QN64",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013211389673 MUHAMMAD MAHTAB ALAM FT26067063502752",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Bills",
-      "description": "Oman Value Added Tax AC-0307081039060016 INR.3,000.00@0.00422200 FT2606705051529",
+      "category": "Shopping",
+      "description": "VAT",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "International Speed trans AC-0307081039060016 INR.3,000.00@0.00422200 FT26067050",
+      "category": "Transfer",
+      "description": "International Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 12.666,
-      "category": "Others",
-      "description": "Speed Transfer IMPS - FAIROZ FAISAL INR.3,000.00@0.00422200 FT26067050515299",
+      "category": "Transfer",
+      "description": "Speed Transfer",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 7.24,
-      "category": "Grocery",
-      "description": "POS 059027-NESTO HYPERMARKET PO BOMCT POS260670HYP910W1",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 10.675,
-      "category": "Others",
-      "description": "POS 044183-RIAL CENTER AL A POS260670P1NSHBQ7",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 0.4,
-      "category": "Others",
-      "description": "POS 334359-AHMED JAMSHIR TRD P O BMCT POS260670YZRZP4XT",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 0.9,
-      "category": "Food And Drinks",
-      "description": "POS 373685-AWAFI SHAWARMA AL HAIL OM POS2606702Q2PYXV2",
+      "category": "Food",
+      "description": "Shawarma",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 1.88,
-      "category": "Grocery",
-      "description": "POS 998819-NESTO HYPERMARKET PO BOMCT POS26067144XRYPPH",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 1.565,
-      "category": "Others",
-      "description": "POS 358976-MARINA AL BUKHARI ALHA POS260671015693HZ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1772913600000,
       "type": "expense"
     },
     {
       "amount": 0.38,
-      "category": "Grocery",
-      "description": "POS 095607-AL QOOT HYPERMARKET BIDOman POS2606802M19R0F3",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773000000000,
       "type": "expense"
     },
     {
       "amount": 0.5,
-      "category": "Others",
-      "description": "POS 474631-SPECIAL MUSCAT SPC AL H POS260680FV0ZWQ0Q",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773000000000,
       "type": "expense"
     },
     {
       "amount": 0.7,
-      "category": "Others",
-      "description": "POS 476764-SAD AL AMARAT PO BOX 37MCT POS260680FSMP6MQM",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773000000000,
       "type": "expense"
     },
     {
       "amount": 0.325,
-      "category": "Grocery",
-      "description": "POS 729862-AL QOOT HYPERMARKET BIDOman POS260690B1869C2V",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773086400000,
       "type": "expense"
     },
     {
       "amount": 0.825,
-      "category": "Grocery",
-      "description": "POS 195767-AL QOOT HYPERMARKET BIDOman POS2606912M4RZBD2",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773086400000,
       "type": "expense"
     },
     {
       "amount": 17.9,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013249285385 NASSR JASIM MOHAMMED AL BALUSHI FT26069008502064",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1773086400000,
       "type": "expense"
     },
     {
       "amount": 0.9,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013261288526 MPC WASH AC 0307 FT26070202500106",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1773172800000,
       "type": "expense"
     },
     {
       "amount": 2.015,
-      "category": "Grocery",
-      "description": "POS 411047-NESTO HYPERMARKET PO BOMCT POS260710VWYHL8QT",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1773259200000,
       "type": "expense"
     },
     {
       "amount": 0.5,
-      "category": "Others",
-      "description": "POS 788808-SPECIAL MUSCAT SPC AL H POS2607102Q2PHVDZ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773259200000,
       "type": "expense"
     },
     {
       "amount": 0.7,
-      "category": "Others",
-      "description": "POS 790402-SAD AL AMARAT PO BOX 37MCT POS260710NY2C4HFJ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773259200000,
       "type": "expense"
     },
     {
       "amount": 2.065,
-      "category": "Grocery",
-      "description": "POS 696814-NESTO HYPERMARKET PO BOMCT POS26074085BRFHVB",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.38,
-      "category": "Grocery",
-      "description": "POS 715886-AL QOOT HYPERMARKET BIDOman POS260740M8KPPKXM",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.75,
-      "category": "Others",
-      "description": "POS 887083-SAD AL AMARAT PO BOX 37MCT POS260740QFJVBSH6",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.39,
-      "category": "Grocery",
-      "description": "POS 845279-AL QOOT HYPERMARKET BIDOman POS260740NJ27F7YV",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.2,
-      "category": "Others",
-      "description": "POS 013437-LAHAN AL RAMAL TRADING AL H POS260740NB222LZM",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Others",
-      "description": "POS 002032-SAD AL AMARAT PO BOX 37MCT POS260740BH1PPTC8",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 2.615,
-      "category": "Grocery",
-      "description": "POS 811015-NESTO HYPERMARKET PO BOMCT POS260740ZK68499W",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.2,
-      "category": "Others",
-      "description": "Wallet Trx BMCT513301404400 MPC WASH AC 0307 FT26074262346231",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "POS 159552-SAD AL AMARAT PO BOX 37MCT POS2607411QPYPD7V",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773518400000,
       "type": "expense"
     },
     {
       "amount": 0.2,
-      "category": "Others",
-      "description": "POS 229115-ABRAJ ALDYAR UNITED COM POS2607509ZZNJ2NY",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773604800000,
       "type": "expense"
     },
     {
       "amount": 0.75,
-      "category": "Others",
-      "description": "POS 238119-SAD AL AMARAT PO BOX 37MCT POS260750C8WVRPNK",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773604800000,
       "type": "expense"
     },
     {
       "amount": 0.39,
-      "category": "Grocery",
-      "description": "POS 383555-AL QOOT HYPERMARKET BIDOman POS2607601SXQMTJ5",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773691200000,
       "type": "expense"
     },
     {
       "amount": 0.85,
-      "category": "Others",
-      "description": "POS 720038-SAD AL AMARAT PO BOX 37MCT POS2607611SJJ0JHG",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773691200000,
       "type": "expense"
     },
     {
       "amount": 0.5,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013333698000 MPC WASH AC 0307 FT26076070417042",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1773691200000,
       "type": "expense"
     },
     {
       "amount": 1.2,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013349362835 MPC WASH AC 0307 FT26077931151589",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1773777600000,
       "type": "expense"
     },
     {
       "amount": 0.845,
-      "category": "Grocery",
-      "description": "POS 072056-NESTO HYPERMARKET PO BOMCT POS2607708YKPNHJW",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1773777600000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT26077QN9041GN",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1773777600000,
       "type": "expense"
     },
     {
       "amount": 0.61,
-      "category": "Grocery",
-      "description": "POS 360472-AL QOOT HYPERMARKET BIDOman POS260770Z9J2KGXG",
+      "category": "Shopping",
+      "description": "Al Qoot Hypermarket",
       "date": 1773777600000,
       "type": "expense"
     },
     {
       "amount": 1.2,
-      "category": "Others",
-      "description": "POS 409578-FAKER TRAD Rustaq POS2607704KD5C69J",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773777600000,
       "type": "expense"
     },
     {
       "amount": 0.3,
-      "category": "Others",
-      "description": "POS 425037-FAKER TRAD Rustaq POS260770YDJFPKSX",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773777600000,
       "type": "expense"
     },
     {
       "amount": 0.3,
-      "category": "Others",
-      "description": "POS 117535-RAWABI QALB AL AMERAT MUSC POS260780Y0CK4QWQ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773864000000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "POS 119493-RAWABI QALB AL AMERAT MUSC POS260780P2SBCBPC",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1773864000000,
       "type": "expense"
     },
     {
       "amount": 1.29,
-      "category": "Others",
+      "category": "Transfer",
       "description": "Transfer Eidiya Transfer FABIHAN MUHAMMED HUSSAIN LFT260789QM5B79Z",
       "date": 1773864000000,
       "type": "expense"
     },
     {
       "amount": 2.995,
-      "category": "Grocery",
-      "description": "POS 901811-LULU MUSCAT HYPERMARKETAL A POS260810P2SD833W",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013384187364 MPC WASH AC 0307 FT26081904443217",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 0.3,
-      "category": "Others",
-      "description": "POS 504323-HAIKAL AL AMERAT RESTAUAL A POS2608114D9JQD73",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 2.1,
-      "category": "Others",
-      "description": "POS 364324-MOHAMMED KHALFAN AL WAHAL A POS2608105S84N722",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013391597230 MUHAMMAD USMAN FT26081811516264",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Others",
-      "description": "POS 537996-ZAIN JALA POS260810YWSRXS2F",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "POS 662006-RAWABI QALB AL AMERAT MUSC POS260810L2C1FPHY",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 65,
-      "category": "Income",
-      "description": "Wallet Trx Cr BMCT013395516084 BM FT26081850286100",
+      "category": "Salary",
+      "description": "Wallet Credit",
       "date": 1774123200000,
       "type": "income"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "POS 188403-JENAN TEA MUTT POS2608106W4417C1",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT26081C46KBMJW",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Others",
-      "description": "POS 330454-SEFLASH GIFT MARKETS POMCT POS260810HPKH0HG3",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 3.3,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013397790230 FABIHAN MUHAMMED HUSSAIN FT26081030046819",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 3.571,
-      "category": "Others",
-      "description": "POS 396477-Quality Saving - Al AmaMUSC POS2608108WXFMGKG",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 4.59,
-      "category": "Grocery",
-      "description": "POS 499529-NESTO HYPERMARKET PO BOMCT POS260810NVTW9NQG",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 3.885,
-      "category": "Grocery",
-      "description": "POS 502347-NESTO HYPERMARKET PO BOMCT POS260810J9GZJ25L",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 3.4,
-      "category": "Others",
-      "description": "POS 534996-BABA BASOO AL A POS26081146SW1W6K",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 1.5,
-      "category": "Income",
-      "description": "Wallet Trx Cr BMCT013399381706 BM FT26081671850955",
+      "category": "Salary",
+      "description": "Wallet Credit",
       "date": 1774123200000,
       "type": "income"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "POS 822868-AL MUASASAT AL WAQFIAT POS260810T0P8R3V4",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 3.465,
-      "category": "Grocery",
-      "description": "POS 858397-MAKKAH HYPERMARKET CENTOMAN POS260810VP5XDM0M",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 1.6,
-      "category": "Others",
-      "description": "POS 043007-DIST. MULTI BUSINESS POMCT POS2608108R5BHMGV",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 2,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT2608121VNK4JR",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 0.699,
-      "category": "Others",
-      "description": "POS 639730-VIVA AL H POS260810XN3MS76R",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774123200000,
       "type": "expense"
     },
     {
       "amount": 3.345,
-      "category": "Others",
-      "description": "POS 470531-NAHDI MANDI RESTURANT GHUB POS2608200Q9WNHZZ",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774209600000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Transfer 76331481-Friendi Topup OMAN NAT ENG AND INVESTMENT CO LFT26082452S4BRM",
+      "category": "Bills",
+      "description": "Friendi Topup",
       "date": 1774209600000,
       "type": "expense"
     },
     {
       "amount": 3.2,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013412060710 SAHIR UDDIN SHAIKH FT26082206215784",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774209600000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013416518011 MPC WASH AC 0307 FT26083380355357",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774296000000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013418361396 MPC WASH AC 0307 FT26083761400401",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774296000000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "POS 619996-SAD AL AMARAT PO BOX 37MCT POS260830CVNDHS8Y",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774296000000,
       "type": "expense"
     },
     {
       "amount": 0.625,
-      "category": "Others",
-      "description": "POS 216647-SPECIAL MUSCAT SPC AL H POS260840YCPX37BS",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774382400000,
       "type": "expense"
     },
     {
       "amount": 1.2,
-      "category": "Others",
-      "description": "POS 227646-SAD AL AMARAT PO BOX 37MCT POS260840C2L723DL",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774382400000,
       "type": "expense"
     },
     {
       "amount": 30,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013430525230 SREEMATH MADURANGA GUNAPALA MANDAWA FT26084585939501",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774382400000,
       "type": "expense"
     },
     {
       "amount": 0.9,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013434565227 ASHIK ULIKUNNAM KARUVANTEVAL FT26085100666630",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774468800000,
       "type": "expense"
     },
     {
       "amount": 0.75,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013434791042 MPC WASH AC 0307 FT26085654079032",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774468800000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013436373785 MPC WASH AC 0307 FT26085224727334",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774468800000,
       "type": "expense"
     },
     {
       "amount": 1.05,
-      "category": "Grocery",
-      "description": "POS 454540-NESTO HYPERMARKET PO BOMCT POS2608501TXVN16R",
+      "category": "Shopping",
+      "description": "NESTO Hypermarket",
       "date": 1774468800000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Others",
-      "description": "POS 237229-SAD AL AMARAT PO BOX 37MCT POS26088090D85CDT",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774728000000,
       "type": "expense"
     },
     {
       "amount": 3,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013443832683 NASER MAGDY ABDELKHALEQ ALI FT26088063327699",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774728000000,
       "type": "expense"
     },
     {
       "amount": 0.4,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013454165408 MPC WASH AC 0307 FT26088725902460",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774728000000,
       "type": "expense"
     },
     {
       "amount": 0.7,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013460518739 MPC WASH AC 0307 FT26088036573036",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774728000000,
       "type": "expense"
     },
     {
       "amount": 0.4,
-      "category": "Food And Drinks",
-      "description": "POS 715452-RED OVEN COFFEE SHOP AL H POS260880PVY74B59",
+      "category": "Food",
+      "description": "Coffee Shop",
       "date": 1774728000000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013468069169 ASHIK ULIKUNNAM KARUVANTEVAL FT26089035499490",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774814400000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013468096133 MPC WASH AC 0307 FT26089035510522",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774814400000,
       "type": "expense"
     },
     {
       "amount": 1.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013470968857 MPC WASH AC 0307 FT26089635974806",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774814400000,
       "type": "expense"
     },
     {
       "amount": 0.4,
-      "category": "Food And Drinks",
-      "description": "POS 903963-RED OVEN COFFEE SHOP AL H POS26089120P9NQFH",
+      "category": "Food",
+      "description": "Coffee Shop",
       "date": 1774814400000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013479515678 MPC WASH AC 0307 FT26090250970704",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 16.3,
-      "category": "Income",
-      "description": "Wallet Trx Cr BMCT013479536120 BM FT26090146774538",
+      "category": "Salary",
+      "description": "Wallet Credit",
       "date": 1774900800000,
       "type": "income"
     },
     {
       "amount": 1.25,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013481352661 MPC WASH AC 0307 FT26090028619531",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013483230140 MPC WASH AC 0307 FT26090196338350",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 0.5,
-      "category": "Others",
-      "description": "POS 383589-SPECIAL MUSCAT SPC AL H POS260900Z3MRDDP0",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 2.5,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013483619285 MD SOHEL RANA FT26090306027464",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 1.1,
-      "category": "Others",
-      "description": "POS 419588-BRIGHT SQUARE INTERNATIAL H POS260900PC3T7GV5",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013485243384 MOHAMMED ALI MOHAMMED IDRIS FT26090777902305",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1774900800000,
       "type": "expense"
     },
     {
       "amount": 0.45,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013489638648 MPC WASH AC 0307 FT26091330184999",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774987200000,
       "type": "expense"
     },
     {
       "amount": 0.25,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013491514013 MPC WASH AC 0307 FT26091038651466",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774987200000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013492677046 MPC WASH AC 0307 FT26091010200379",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1774987200000,
       "type": "expense"
     },
     {
       "amount": 0.8,
-      "category": "Food And Drinks",
-      "description": "POS 424787-RED OVEN COFFEE SHOP AL H POS260910Z1W7Z0Z8",
+      "category": "Food",
+      "description": "Coffee Shop",
       "date": 1774987200000,
       "type": "expense"
     },
     {
       "amount": 0.75,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013500622462 MPC WASH AC 0307 FT26092070029200",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1775073600000,
       "type": "expense"
     },
     {
       "amount": 0.6,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013503510499 ASHIK ULIKUNNAM KARUVANTEVAL FT26092591946420",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1775073600000,
       "type": "expense"
     },
     {
       "amount": 0.5,
       "category": "Shopping",
-      "description": "POS 836225-NOOR SHOPPING AL HAIL AL H POS260920FRRR8C7Q",
+      "description": "POS Purchase",
       "date": 1775073600000,
       "type": "expense"
     },
     {
       "amount": 2.6,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013507011940 MPC WASH AC 0307 FT26092456828235",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1775073600000,
       "type": "expense"
     },
     {
       "amount": 0.75,
-      "category": "Others",
-      "description": "POS 843233-SAD AL AMARAT PO BOX 37MCT POS2609508PYX146R",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 1.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013513498323 SAHIR UDDIN SHAIKH FT26095520239094",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 0.31,
-      "category": "Others",
-      "description": "POS 401207-ALI BIN NAJEEB AL S POS2609510GH1YV73",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 0.2,
-      "category": "Others",
-      "description": "POS 409121-SAD AL AMARAT PO BOX 37MCT POS2609509P3Q1XHP",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 0.5,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013516112753 ALAM MAMTAZ UDDIN FT26095994233282",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 4.6,
-      "category": "Income",
-      "description": "Wallet Trx Cr BMCT013521405604 BM FT26095501466924",
+      "category": "Salary",
+      "description": "Wallet Credit",
       "date": 1775332800000,
       "type": "income"
     },
     {
       "amount": 1.3,
-      "category": "Others",
-      "description": "POS 170040-RESTURANT ALHA POS260950RQ80VR68",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 0.21,
-      "category": "Grocery",
-      "description": "POS 119578-GRAND HYPERMARKET AL S POS26095096QXW7BC",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 0.65,
-      "category": "Others",
-      "description": "POS 175735-SPECIAL MUSCAT SPC AL H POS2609500YBQXTQT",
+      "category": "Shopping",
+      "description": "POS Purchase",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 1.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013524754681 SAHIR UDDIN SHAIKH FT26095126842029",
+      "category": "Shopping",
+      "description": "Wallet Transfer",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 0.1,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013529663215 MPC WASH AC 0307 FT26095477061865",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1775332800000,
       "type": "expense"
     },
     {
       "amount": 1.25,
-      "category": "Others",
-      "description": "Wallet Trx BMCT013532211761 MPC WASH AC 0307 FT26095994040212",
+      "category": "Shopping",
+      "description": "MPC Wash",
       "date": 1775332800000,
       "type": "expense"
     }

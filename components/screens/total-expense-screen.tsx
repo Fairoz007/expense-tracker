@@ -127,7 +127,7 @@ export function TotalExpenseScreen({ onBack }: TotalExpenseScreenProps) {
           <div>
             <span className="text-foreground">You have Spent </span>
             <span className="text-[var(--coral)] font-bold text-xl">
-              ${totalSpent.toLocaleString()}
+              OMR {totalSpent.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
             </span>
           </div>
           <span className="text-sm text-muted-foreground">{monthDisplay}</span>
@@ -188,7 +188,7 @@ export function TotalExpenseScreen({ onBack }: TotalExpenseScreenProps) {
               {pieData.length > 1 ? pieData[1].name : pieData[0].name}
               <br />
               <span className="text-muted-foreground">
-                ${(pieData.length > 1 ? pieData[1].amount : pieData[0].amount).toLocaleString()}
+                OMR {(pieData.length > 1 ? pieData[1].amount : pieData[0].amount).toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
               </span>
             </div>
           )}
@@ -215,7 +215,7 @@ export function TotalExpenseScreen({ onBack }: TotalExpenseScreenProps) {
             <div key={item.name} className="text-center">
               <p className="text-sm font-medium text-foreground">{item.name}</p>
               <p className="text-xs text-muted-foreground">
-                ${item.amount.toLocaleString()}
+                OMR {item.amount.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
               </p>
             </div>
           ))}

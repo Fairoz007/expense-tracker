@@ -28,10 +28,19 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getTime();
 
-  // Fetch expenses from Convex
+  // Fetch current year range for analytics
+  const startOfYear = new Date(new Date().getFullYear(), 0, 1).getTime();
+  const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+
+  // Fetch expenses from Convex (limited to current year for analytics)
   const expenses = useQuery(
     api.expenses.getExpenses,
-    user?.id ? { clerkId: user.id } : "skip"
+    user?.id ? { clerkId: user.id, startDate: startOfYear, endDate: endOfYear } : "skip"
+  );
+
+  const recentExpenses = useQuery(
+    api.expenses.getRecentExpenses,
+    user?.id ? { clerkId: user.id, limit: 5 } : "skip"
   );
 
   const expensesSummary = useQuery(
@@ -39,6 +48,11 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
     user?.id
       ? { clerkId: user.id, startDate: startOfMonth, endDate: endOfMonth }
       : "skip"
+  );
+
+  const balance = useQuery(
+    api.expenses.getBalance,
+    user?.id ? { clerkId: user.id } : "skip"
   );
 
   const currentMonth = new Date().toLocaleString('default', { month: 'short' });
@@ -72,20 +86,16 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
 
   // Get recent transactions
   const recentTransactions = useMemo(() => {
+    if (recentExpenses) return recentExpenses;
     if (!expenses || expenses.length === 0) return [];
-    // Show all recent transactions
+    // Fallback to manual sort if recentExpenses is not available (loading)
     return [...expenses].sort((a, b) => b.date - a.date).slice(0, 5);
-  }, [expenses]);
+  }, [recentExpenses, expenses]);
 
   // Calculate total balance
   const totalBalance = useMemo(() => {
-    if (!expenses || expenses.length === 0) return 0;
-    
-    const income = expenses.filter(e => e.type === "income").reduce((sum, e) => sum + e.amount, 0);
-    const spent = expenses.filter(e => e.type === "expense").reduce((sum, e) => sum + e.amount, 0);
-    
-    return income - spent;
-  }, [expenses]);
+    return balance || 0;
+  }, [balance]);
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -112,7 +122,10 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           </AvatarFallback>
         </Avatar>
         <h1 className="text-xl font-semibold text-foreground">Home</h1>
-        <button className="relative p-2">
+        <button 
+          onClick={() => onNavigate("reminders")}
+          className="relative p-2"
+        >
           <Bell className="h-6 w-6 text-[var(--coral)]" />
           <span className="absolute top-1.5 right-1.5 h-2 w-2 bg-[var(--coral)] rounded-full" />
         </button>
@@ -132,7 +145,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
               <div>
                 <p className="text-white/70 text-sm">Total Balance</p>
                 <p className="text-white text-3xl font-bold mt-1">
-                  ${totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                  OMR {totalBalance.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
                 </p>
               </div>
               <button className="text-white/70">
@@ -191,7 +204,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           {analyticsData.map((item) => (
             <div key={item.month} className="text-center">
               <span className="text-xs text-muted-foreground font-medium">
-                ${item.amount >= 1000 ? (item.amount / 1000).toFixed(1) + 'k' : item.amount}
+                OMR {item.amount >= 1000 ? (item.amount / 1000).toFixed(3) + 'k' : item.amount.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
               </span>
             </div>
           ))}
@@ -227,7 +240,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
               </div>
               <div className="text-right">
                 <p className={`font-bold ${tx.type === "income" ? "text-green-500" : "text-[var(--coral)]"}`}>
-                  {tx.type === "income" ? "+" : "-"}${tx.amount.toLocaleString()}
+                  {tx.type === "income" ? "+" : "-"}OMR {tx.amount.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
                 </p>
                 <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">
                   {new Date(tx.date).toLocaleDateString("en-US", { weekday: "short", day: "2-digit", month: "short", year: "numeric" })}

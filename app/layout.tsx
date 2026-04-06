@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     "A simple and efficient personal finance management app that allows you to track your daily expenses and income.",
   generator: "v0.app",
+  manifest: "/manifest.json",
   icons: {
     icon: [
       {
@@ -40,6 +41,7 @@ export const viewport: Viewport = {
 };
 
 import { Toaster } from "sonner";
+import { ServiceWorkerRegistration } from "@/components/providers/sw-registration";
 
 export default function RootLayout({
   children,
@@ -52,6 +54,7 @@ export default function RootLayout({
         <ConvexClientProvider>
           {children}
           <Toaster position="top-center" richColors />
+          <ServiceWorkerRegistration />
         </ConvexClientProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

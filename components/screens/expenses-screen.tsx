@@ -23,10 +23,16 @@ export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
   const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getTime();
   const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getTime();
 
-  // Fetch data from Convex
+  // Fetch balance from Convex
+  const balanceQuery = useQuery(
+    api.expenses.getBalance,
+    user?.id ? { clerkId: user.id } : "skip"
+  );
+
+  // Fetch only current month's expenses for list
   const expenses = useQuery(
     api.expenses.getExpenses,
-    user?.id ? { clerkId: user.id } : "skip"
+    user?.id ? { clerkId: user.id, startDate: startOfMonth, endDate: endOfMonth } : "skip"
   );
 
   const expensesSummary = useQuery(
@@ -52,42 +58,28 @@ export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
 
   // Calculate stats from Convex data
   const stats = useMemo(() => {
-    if (!expenses || expenses.length === 0) {
-      return { monthSpent: 0, weekSpent: 0, daySpent: 0, balance: 0 };
-    }
-
+    const monthSpent = expensesSummary?.totalExpenses || 0;
+    
+    // For weekSpent and daySpent, we can still use the (now filtered) expenses list
     const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
     const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())).getTime();
     const startOfDay = new Date().setHours(0, 0, 0, 0);
 
-    const monthSpent = expenses
-      .filter(e => e.type === "expense" && e.date >= startOfMonth)
-      .reduce((sum, e) => sum + e.amount, 0);
-    
-    const weekSpent = expenses
+    const weekSpent = (expenses || [])
       .filter(e => e.type === "expense" && e.date >= startOfWeek)
       .reduce((sum, e) => sum + e.amount, 0);
 
-    const daySpent = expenses
+    const daySpent = (expenses || [])
       .filter(e => e.type === "expense" && e.date >= startOfDay)
-      .reduce((sum, e) => sum + e.amount, 0);
-
-    const totalIncome = expenses
-      .filter(e => e.type === "income")
-      .reduce((sum, e) => sum + e.amount, 0);
-
-    const totalExpenses = expenses
-      .filter(e => e.type === "expense")
       .reduce((sum, e) => sum + e.amount, 0);
 
     return { 
       monthSpent, 
       weekSpent, 
       daySpent, 
-      balance: totalIncome - totalExpenses 
+      balance: balanceQuery || 0 
     };
-  }, [expenses]);
+  }, [expenses, expensesSummary, balanceQuery]);
 
   // Group expenses by category
   const expenseCategories = useMemo(() => {
@@ -172,19 +164,19 @@ export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
           <div className="bg-[var(--purple)] rounded-2xl p-4 w-40">
             <p className="text-white/80 text-xs font-bold mb-1 uppercase tracking-wider">Month Spent</p>
             <p className="text-white text-xl font-bold">
-              ${stats.monthSpent.toLocaleString("en-US", { minimumFractionDigits: 0 })}
+              OMR {stats.monthSpent.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
             </p>
           </div>
           <div className="bg-[var(--coral)] rounded-2xl p-4 w-40">
             <p className="text-white/80 text-xs font-bold mb-1 uppercase tracking-wider">Week Spent</p>
             <p className="text-white text-xl font-bold">
-              ${stats.weekSpent.toLocaleString("en-US", { minimumFractionDigits: 0 })}
+              OMR {stats.weekSpent.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
             </p>
           </div>
           <div className="bg-[var(--navy)] rounded-2xl p-4 w-40">
             <p className="text-white/80 text-xs font-bold mb-1 uppercase tracking-wider">Day Spent</p>
             <p className="text-white text-xl font-bold">
-              ${stats.daySpent.toLocaleString("en-US", { minimumFractionDigits: 0 })}
+              OMR {stats.daySpent.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
             </p>
           </div>
         </div>
@@ -229,13 +221,13 @@ export function ExpensesScreen({ onNavigate }: ExpensesScreenProps) {
                 <div>
                   <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Spent</p>
                   <p className="text-lg font-bold text-[var(--purple)]">
-                    ${category.totalSpend.toLocaleString()}
+                    OMR {category.totalSpend.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Budget</p>
                   <p className="text-lg font-bold text-foreground">
-                    ${Math.round(category.totalBudget).toLocaleString()}
+                    OMR {Math.round(category.totalBudget).toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
                   </p>
                 </div>
               </div>

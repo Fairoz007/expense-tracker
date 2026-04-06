@@ -174,44 +174,83 @@ const rawData = `2026-02-18 00:00:00	2026-02-18 00:00:00	Transfer Advance Housin
 2026-04-05 00:00:00	2026-04-05 00:00:00	Wallet Trx BMCT013529663215 MPC WASH AC 0307 FT26095477061865	0.1		2.416
 2026-04-05 00:00:00	2026-04-05 00:00:00	Wallet Trx BMCT013532211761 MPC WASH AC 0307 FT26095994040212	1.25		1.166`;
 
-const lines = rawData.split('\n');
+const lines = rawData.trim().split('\n');
 const expenses = [];
 
 for (const line of lines) {
-  if (!line.trim()) continue;
   const parts = line.split('\t');
   if (parts.length < 5) continue;
-
-  const dateStr = parts[0]; // Post Date
-  const narration = parts[2];
-  const debit = parts[3] ? parseFloat(parts[3]) : 0;
-  const credit = parts[4] ? parseFloat(parts[4]) : 0;
-
+  
+  const dateStr = parts[0].trim();
+  // Using Date.parse or just converting to timestamp
   const date = new Date(dateStr).getTime();
-  const type = credit > 0 ? 'income' : 'expense';
-  const amount = credit > 0 ? credit : debit;
-
-  // Attempt to categorize
-  let category = 'Others';
+  const narration = parts[2].trim();
   const lowerNarration = narration.toLowerCase();
-  if (lowerNarration.includes('nesto') || lowerNarration.includes('qoot') || lowerNarration.includes('hypermarket') || lowerNarration.includes('grocery')) {
-    category = 'Grocery';
-  } else if (lowerNarration.includes('restaurant') || lowerNarration.includes('coffee') || lowerNarration.includes('food') || lowerNarration.includes('shawarma')) {
-    category = 'Food And Drinks';
-  } else if (lowerNarration.includes('mazaya') || lowerNarration.includes('shopping')) {
-    category = 'Shopping';
-  } else if (lowerNarration.includes('transport') || lowerNarration.includes('car')) {
-    category = 'Transport';
-  } else if (lowerNarration.includes('fees') || lowerNarration.includes('tax') || lowerNarration.includes('annual')) {
-    category = 'Bills';
-  } else if (lowerNarration.includes('salary') || lowerNarration.includes('initial balance') || credit > 0) {
-    category = 'Income';
+  
+  const debit = parseFloat(parts[3] || '0');
+  const credit = parseFloat(parts[4] || '0');
+  
+  let amount = 0;
+  let type = '';
+  
+  if (debit > 0) {
+    amount = debit;
+    type = 'expense';
+  } else if (credit > 0) {
+    amount = credit;
+    type = 'income';
+  } else {
+    continue;
+  }
+  
+  let category = 'Others';
+  if (type === 'income') category = 'Salary';
+  else if (lowerNarration.includes('resto') || lowerNarration.includes('coffee') || lowerNarration.includes('shawarma')) category = 'Food';
+  else if (lowerNarration.includes('friendi') || lowerNarration.includes('vodafone')) category = 'Bills';
+  else if (lowerNarration.includes('transfer') || lowerNarration.includes('international')) category = 'Transfer';
+  else category = 'Shopping';
+
+  let description = 'Other';
+  if(lowerNarration.includes('nesto')) {
+    description = 'NESTO Hypermarket';
+  } else if (lowerNarration.includes('qoot')) {
+    description = 'Al Qoot Hypermarket';
+  } else if (lowerNarration.includes('friendi topup')) {
+    description = 'Friendi Topup';
+  } else if (lowerNarration.includes('mpc wash')) {
+    description = 'MPC Wash';
+  } else if (lowerNarration.includes('salary')) {
+    description = 'Salary';
+  } else if (lowerNarration.includes('restaurant')) {
+    description = 'Restaurant';
+  } else if (lowerNarration.includes('coffee')) {
+    description = 'Coffee Shop';
+  } else if (lowerNarration.includes('shawarma')) {
+    description = 'Shawarma';
+  } else if (lowerNarration.includes('wallet trx cr')) {
+    description = 'Wallet Credit';
+  } else if (lowerNarration.includes('wallet trx')) {
+    description = 'Wallet Transfer';
+  } else if (lowerNarration.includes('tax')) {
+    description = 'VAT';
+  } else if (lowerNarration.includes('annual fees')) {
+    description = 'Annual Fee';
+  } else if (lowerNarration.includes('transfer advance housing')) {
+    description = 'Advance Housing';
+  } else if (lowerNarration.includes('speed transfer')) {
+    description = 'Speed Transfer';
+  } else if (lowerNarration.includes('international speed trans')) {
+    description = 'International Transfer';
+  } else if (lowerNarration.includes('pos')) {
+    description = 'POS Purchase';
+  } else {
+    description = narration;
   }
 
   expenses.push({
     amount,
     category,
-    description: narration,
+    description,
     date,
     type
   });

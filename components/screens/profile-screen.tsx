@@ -16,44 +16,38 @@ import {
   Trash2,
 } from "lucide-react";
 
+import { Bell } from "lucide-react";
+
 interface ProfileScreenProps {
   onBack: () => void;
+  onNavigate: (screen: string) => void;
 }
 
 const menuItems = [
   {
     icon: User,
     title: "User profile",
-    description: "Change profile image, name or password",
+    description: "Manage your personal information",
   },
   {
-    icon: BadgeCheck,
-    title: "Premium plans",
-    description: "Explore premium options and enjoy",
-  },
-  {
-    icon: Building2,
-    title: "Accounts",
-    description: "Manage accounts and description",
+    icon: Bell,
+    title: "Reminders",
+    description: "Set daily expense tracking reminders",
+    screen: "reminders",
   },
   {
     icon: DollarSign,
     title: "Currencies",
-    description: "Add other currencies, adjust exchange rates",
+    description: "Adjust exchange rates and currencies",
   },
   {
     icon: Grid3X3,
     title: "Categories",
-    description: "Manage categories and add sub-categories",
-  },
-  {
-    icon: Lock,
-    title: "Security",
-    description: "Protect your app with PIN or Fingerprint",
+    description: "Manage your expense categories",
   },
 ];
 
-export function ProfileScreen({ onBack }: ProfileScreenProps) {
+export function ProfileScreen({ onBack, onNavigate }: ProfileScreenProps) {
   const { user } = useUser();
   const { signOut } = useClerk();
 
@@ -111,6 +105,7 @@ export function ProfileScreen({ onBack }: ProfileScreenProps) {
           {menuItems.map((item) => (
             <button
               key={item.title}
+              onClick={() => item.screen && onNavigate(item.screen)}
               className="flex items-center gap-4 p-4 rounded-xl hover:bg-accent transition-colors text-left"
             >
               <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
