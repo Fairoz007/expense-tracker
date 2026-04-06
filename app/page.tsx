@@ -53,7 +53,7 @@ export default function HomePage() {
       }).then(() => {
         seedInitialData({ clerkId: user.id }).catch(() => {});
       }).catch((err) => {
-        console.log("[v0] Convex user sync skipped:", err?.message || "Not connected");
+        console.log("Convex user sync skipped:", err?.message || "Not connected");
       });
     }
   }, [isSignedIn, user, createOrGetUser, seedInitialData]);
