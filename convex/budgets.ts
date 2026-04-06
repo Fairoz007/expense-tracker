@@ -82,21 +82,24 @@ export const getBudgetStatus = query({
       .collect();
 
     const expenseMap = new Map<string, number>();
-    expenses
-      .filter((e) => e.type === "expense")
-      .forEach((e) => {
-        const current = expenseMap.get(e.category) || 0;
-        expenseMap.set(e.category, current + e.amount);
-      });
+    expenses.forEach((e) => {
+      const category = e.category || "Others";
+      const amount = typeof e.amount === "number" ? e.amount : 0;
+      if (e.type === "expense") {
+        const current = expenseMap.get(category) || 0;
+        expenseMap.set(category, current + amount);
+      }
+    });
 
     return budgets.map((b) => {
       const actual = expenseMap.get(b.category) || 0;
+      const budgetAmount = b.amount || 0;
       return {
         category: b.category,
-        budget: b.amount,
+        budget: budgetAmount,
         actual: actual,
-        remaining: b.amount - actual,
-        percentage: b.amount > 0 ? (actual / b.amount) * 100 : (actual > 0 ? 100 : 0),
+        remaining: Math.max(0, budgetAmount - actual),
+        percentage: budgetAmount > 0 ? (actual / budgetAmount) * 100 : (actual > 0 ? 100 : 0),
       };
     });
   },
